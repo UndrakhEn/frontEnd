@@ -1,0 +1,53 @@
+.logo {
+  height: 32px;
+  background: rgba(197, 16, 16, 0.2);
+  margin: 16px;
+}
+.postAvatar {
+  margin: 0;
+}
+
+.ant-btn {
+  margin-top: 50px;
+  margin-left: 25px;
+  margin-right: 20px;
+}
+
+nz-avatar {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 22px;
+}
+nz-content {
+  min-height: 100vh;
+  margin: 0;
+  /* padding: 24px; */
+}
+.img {
+  width: 100%;
+  height: auto;
+  padding-bottom: 16px;
+}
+.post {
+  padding: 24px;
+  margin: 24px;
+  background: #ffffff;
+  border-radius: 6px;
+}
+.postReaction {
+  margin-right: 8px;
+}
+
+.statistic {
+  height: 100vh;
+  margin: 0;
+  background: white;
+  padding: 24px;
+  position: fixed;
+}
+
+/* .inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 100vh;
+} */

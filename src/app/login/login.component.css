@@ -1,0 +1,44 @@
+.ant-row {
+  background: rgb(245, 246, 246);
+  height: 100%;
+  margin: 0;
+  padding: 4%;
+}
+
+.ant-col {
+  padding: 5%;
+  background: #ffffff;
+  height: 100%;
+}
+
+.ant-form-item {
+  padding: 0;
+  background: #ffffff;
+}
+
+.ant-form-item-control-wrapper {
+  padding: 0;
+}
+
+.logo {
+  font-size: 24px;
+  color: #32a7fc;
+}
+
+.a {
+  background-image: url("/assets/zuragTom2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
+.login-img {
+  height: 100%;
+}
+.img {
+  height: 300px;
+}
+.shadow {
+  padding: 0;
+  box-shadow: 0px 0px 8px 3px rgb(204, 202, 202);
+}

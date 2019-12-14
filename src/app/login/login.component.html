@@ -1,0 +1,80 @@
+<div nz-row>
+  <div class="shadow" nz-row>
+    <div class="a" nz-col nzXs="24" nzSm="24" nzMd="16" nzLg="16" nzXl="16">
+      <div
+        class="login-img"
+        nz-row
+        nzType="flex"
+        nzJustify="space-around"
+        nzAlign="middle"
+      ></div>
+    </div>
+    <div nz-col nzXs="24" nzSm="24" nzMd="8" nzLg="8" nzXl="8">
+      <h1>Тавтай морил</h1>
+      <p>
+        Монгол Улсын Боловсролын Их Сургуулын санал хүсэлт шийдвэрлэх систем.
+      </p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="error">
+          <nz-alert
+            nzMessage="Хэрэглэгчийн нэр, нууц үг буруу байна"
+            nzType="error"
+          ></nz-alert>
+        </div>
+        <div *ngIf="warn">
+          <nz-alert
+            nzType="warning"
+            nzMessage="Хэрэглэгчийн нэр, нууц үг оруулна уу"
+          ></nz-alert>
+        </div>
+        <br />
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Нэвтрэх нэр оруулна уу!">
+            <nz-input-group [nzPrefix]="preUser" nzSize="large">
+              <input
+                nz-input
+                placeholder="Хэрэглэгчийн нэр"
+                formControlName="username"
+              />
+              <ng-template #preUser>
+                <i nz-icon nzType="user"></i>
+              </ng-template>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <br />
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Нууц үг оруулна уу!">
+            <nz-input-group
+              [nzPrefix]="preLock"
+              [nzSuffix]="sufEye"
+              nzSize="large"
+            >
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                nz-input
+                placeholder="Нууц үг"
+                formControlName="password"
+              />
+              <ng-template #preLock>
+                <i nz-icon nzType="lock"></i>
+              </ng-template>
+              <ng-template #sufEye>
+                <i
+                  nz-icon
+                  [nzType]="showPassword ? 'eye-invisible' : 'eye'"
+                  (click)="showPassword = !showPassword"
+                ></i>
+              </ng-template>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <br />
+        <button nz-button nzSize="default" nzType="primary">
+          Нэвтрэх
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
