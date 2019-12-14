@@ -11,11 +11,13 @@ import { registerLocaleData } from "@angular/common";
 import mn from "@angular/common/locales/mn";
 import { LoginComponent } from "./login/login.component";
 import { HomeComponent } from "./home/home.component";
+import { PostComponent } from './post/post.component';
+import { PostsComponent } from './posts/posts.component';
 
 registerLocaleData(mn);
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, PostComponent, PostsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
