@@ -6,6 +6,8 @@ import {
   Validators,
   FormBuilder
 } from "@angular/forms";
+import { AuthService } from "src/services/auth.service";
+import { first } from "rxjs/operators";
 
 @Component({
   selector: "app-login",
@@ -22,7 +24,11 @@ export class LoginComponent implements OnInit {
   // appname = config.APP_NAME;
   appname = "Нэвтрэх";
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -51,6 +57,17 @@ export class LoginComponent implements OnInit {
     console.log("login");
     console.log(this.f.username.value, this.f.password.value);
     this.loading = true;
-    this.router.navigate([""]);
+    this.auth
+      .login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(data => {
+        if (data === null) {
+          this.loading = false;
+          this.warn = false;
+          this.error = true;
+        } else {
+          this.router.navigate([""]);
+        }
+      });
   }
 }

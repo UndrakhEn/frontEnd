@@ -4,12 +4,14 @@ import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { PostComponent } from "./post/post.component";
 import { PostsComponent } from "./posts/posts.component";
+import { AuthGuard } from "src/services/auth.guard";
 
 const routes: Routes = [
   { path: "", redirectTo: "app/posts", pathMatch: "full" },
   {
     path: "app",
     component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: "", redirectTo: "/app/posts", pathMatch: "full" },
       { path: "posts", component: PostsComponent },
