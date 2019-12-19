@@ -1,0 +1,63 @@
+<div class="main">
+  <form nz-form [formGroup]="postForm" (ngSubmit)="newPost()">
+    <!-- is visible -->
+    <nz-form-item>
+      <nz-form-control [nzSpan]="8" [nzOffset]="0">
+        <label nz-checkbox formControlName="is_visible">Нэр нууцлах</label>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- is thanks -->
+    <nz-form-item>
+      <nz-form-control [nzSpan]="16" [nzOffset]="0">
+        <label nz-checkbox formControlName="is_thanks">Талархал эсэх</label>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- body -->
+    <nz-form-item>
+      <nz-form-control
+        [nzSpan]="16"
+        nzErrorTip="Өөрийн сэтгэгдэлээ оруулна уу."
+      >
+        <nz-mention
+          [nzSuggestions]="users"
+          [nzValueWith]="valueWith"
+          (nzOnSelect)="onSelect($event)"
+        >
+          <textarea
+            placeholder="Сэтгэгдэл..."
+            [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+            nz-input
+            nzMentionTrigger
+            formControlName="body"
+            [(ngModel)]="inputValue"
+          ></textarea>
+          <ng-container *nzMentionSuggestion="let user">
+            <nz-avatar
+              nzSize="small"
+              [nzText]="user.f_name"
+              [nzSrc]="user.avatar"
+            ></nz-avatar>
+            <span>{{ user.l_name }} - {{ user.f_name }}</span>
+          </ng-container>
+        </nz-mention>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- date -->
+    <nz-form-item>
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <nz-date-picker
+          placeholder="Хүчинтэй хугацаа"
+          formControlName="deadline"
+          [nzDisabled]="this.postForm.controls.is_thanks.value"
+        ></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="16" [nzOffset]="">
+        <button nz-button nzType="primary">Илгээх</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

@@ -10,16 +10,19 @@
         ></nz-avatar>
       </div>
       <div nz-col nzSpan="15">
-        <h4>{{ i.title }}</h4>
-        <p>{{ i.created_date }}</p>
+        <h4>{{ i.user_id }}</h4>
+        <p>{{ i.created_date | date: "yyyy/M/d HH:mm" }}</p>
       </div>
       <div nz-col nzSpan="6"></div>
     </div>
     <div nz-row>
       <div nz-col nzSpan="24">
         <p>
-          {{ i.content.substring(0, 230) }}...
-          <a routerLink="/app/post">Үргэлжлүүлэх</a>
+          {{ i.body.substring(0, 230) }}...
+
+          <a routerLink="/app/post/{{ i._id }}"
+            ><i nz-icon nzType="right-circle" nzTheme="outline"></i
+          ></a>
         </p>
       </div>
     </div>
@@ -31,17 +34,18 @@
     <div nz-row>
       <div nz-col nzSpan="24">
         <span class="postReaction">
-          <i nz-icon nzType="like-o" style="margin-right: 8px;"></i>{{ i.like }}
+          <i nz-icon nzType="like-o" style="margin-right: 8px;"></i
+          >{{ i.like_cnt }}
         </span>
         <nz-divider nzType="vertical"></nz-divider>
         <span class="postReaction">
           <i nz-icon nzType="dislike-o" style="margin-right: 8px;"></i
-          >{{ i.dislike }}
+          >{{ i.dislike_cnt }}
         </span>
         <nz-divider nzType="vertical"></nz-divider>
         <span class="postReaction">
           <i nz-icon nzType="message" style="margin-right: 8px;"></i>
-          {{ i.comments }}
+          {{ i.comments_cnt }}
         </span>
       </div>
     </div>

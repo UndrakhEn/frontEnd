@@ -63,9 +63,15 @@
       </li> -->
     </ul>
 
-    <button class="new" nz-button nzType="primary" [nzSize]="'default'">
+    <button
+      class="new"
+      nz-button
+      nzType="primary"
+      [nzSize]="'default'"
+      routerLink="/app/posts/create"
+    >
       <i nz-icon nzType="plus"></i
-      ><span *ngIf="!isCollapsed">Шинээр үүсгэх</span>
+      ><span *ngIf="!isCollapsed"> Шинээр үүсгэх </span>
     </button>
   </nz-sider>
   <nz-layout>

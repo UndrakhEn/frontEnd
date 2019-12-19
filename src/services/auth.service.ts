@@ -18,9 +18,11 @@ export class AuthService {
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
+
   public get getUser(): any {
     return this.currentUserSubject.value;
   }
+
   login(own_code: string, password: string) {
     return this.http
       .post<any>(this.URL, {
