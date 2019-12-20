@@ -11,14 +11,25 @@ import { registerLocaleData } from "@angular/common";
 import mn from "@angular/common/locales/mn";
 import { LoginComponent } from "./login/login.component";
 import { HomeComponent } from "./home/home.component";
-import { PostComponent } from './post/post.component';
-import { PostsComponent } from './posts/posts.component';
-import { CreatePostComponent } from './create-post/create-post.component';
+import { PostComponent } from "./post/post.component";
+import { PostsComponent } from "./posts/posts.component";
+import { CreatePostComponent } from "./create-post/create-post.component";
+import { PrivateInformationComponent } from "./private-information/private-information.component";
+import { NotificationComponent } from './notification/notification.component';
 
 registerLocaleData(mn);
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, PostComponent, PostsComponent, CreatePostComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    PostComponent,
+    PostsComponent,
+    CreatePostComponent,
+    PrivateInformationComponent,
+    NotificationComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -45,6 +45,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem("currentUser");
     this.currentUserSubject.next(null);
+    // this.router.navigate(['/login'])
   }
 
   private handleError(error: HttpErrorResponse) {

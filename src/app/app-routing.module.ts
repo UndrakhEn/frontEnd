@@ -6,6 +6,8 @@ import { PostComponent } from "./post/post.component";
 import { PostsComponent } from "./posts/posts.component";
 import { AuthGuard } from "src/services/auth.guard";
 import { CreatePostComponent } from "./create-post/create-post.component";
+import { PrivateInformationComponent } from "./private-information/private-information.component";
+import { NotificationComponent } from "./notification/notification.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "app/posts", pathMatch: "full" },
@@ -17,7 +19,9 @@ const routes: Routes = [
       { path: "", redirectTo: "/app/posts", pathMatch: "full" },
       { path: "posts", component: PostsComponent },
       { path: "post/:id", component: PostComponent },
-      { path: "posts/create", component: CreatePostComponent }
+      { path: "posts/create", component: CreatePostComponent },
+      { path: "private", component: PrivateInformationComponent },
+      { path: "notification", component: NotificationComponent }
     ]
   },
   { path: "login", component: LoginComponent },

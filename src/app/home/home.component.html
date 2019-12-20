@@ -20,6 +20,7 @@
       [nzInlineCollapsed]="isCollapsed"
     >
       <li
+        routerLink="/app/private"
         nz-menu-item
         [nzTitle]="isCollapsed ? 'Хувийн мэдээлэл' : ''"
         nzPlacement="right"
@@ -30,6 +31,7 @@
       </li>
       <li
         nz-menu-item
+        routerLink="/app/posts"
         [nzTitle]="isCollapsed ? 'Санал хүсэлт' : ''"
         nzPlacement="right"
         nz-tooltip
@@ -39,6 +41,7 @@
       </li>
       <li
         nz-menu-item
+        routerLink="/app/notification"
         [nzTitle]="isCollapsed ? 'Мэдэгдэл' : ''"
         nzPlacement="right"
         nz-tooltip
@@ -46,8 +49,10 @@
         <i nz-icon nzType="bell" nzTheme="outline"></i>
         <span>Мэдэгдэл</span>
       </li>
+
       <li
         nz-menu-item
+        routerLink="/login"
         [nzTitle]="isCollapsed ? 'Гарах' : ''"
         nzPlacement="right"
         nz-tooltip
@@ -55,12 +60,6 @@
         <i nz-icon nzType="logout" nzTheme="outline"></i>
         <span>Гарах</span>
       </li>
-      <!-- <li nz-submenu nzTitle="Шинэ хүсэлт" nzIcon="team">
-        <ul>
-          <li nz-menu-item>Санал хүсэлт</li>
-          <li nz-menu-item>Талархал</li>
-        </ul>
-      </li> -->
     </ul>
 
     <button
