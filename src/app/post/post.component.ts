@@ -15,7 +15,8 @@ export class PostComponent implements OnInit {
   postData: any = {};
   commentData: Array<any> = [];
   commentForm: FormGroup;
-
+  name: any = {};
+  commentName: any = {};
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
@@ -25,9 +26,11 @@ export class PostComponent implements OnInit {
     this.post_id = this.route.snapshot.paramMap.get("id");
     this.postService.getPost(this.post_id).subscribe(res => {
       this.postData = res[0];
+      this.name = this.postData.user[0];
     });
     this.postService.getIdComment(this.post_id).subscribe(res => {
       this.commentData = res;
+      console.log(this.commentData);
     });
   }
 

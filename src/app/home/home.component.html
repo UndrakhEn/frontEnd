@@ -52,10 +52,10 @@
 
       <li
         nz-menu-item
-        routerLink="/login"
         [nzTitle]="isCollapsed ? 'Гарах' : ''"
         nzPlacement="right"
         nz-tooltip
+        (click)="showconfirm()"
       >
         <i nz-icon nzType="logout" nzTheme="outline"></i>
         <span>Гарах</span>

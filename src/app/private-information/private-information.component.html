@@ -1,1 +1,144 @@
-<p>private-information works!</p>
+<div nz-row class="main">
+  <div nz-row>
+    <div nz-col nzSpan="5"></div>
+    <div nz-col nzSpan="1">
+      <nz-avatar
+        [ngStyle]="{ 'background-color': color }"
+        [nzText]="text"
+        nzSize="large"
+        style="vertical-align: middle;"
+      ></nz-avatar>
+    </div>
+
+    <div nz-col nzSpan="8">
+      <button
+        nz-button
+        [nzType]="'dashed'"
+        (click)="change()"
+        style="margin-left: 24px; vertical-align: middle;"
+      >
+        <span>Зураг солих</span>
+      </button>
+    </div>
+  </div>
+  <form nz-form [formGroup]="userForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="type">
+        <span>
+          Төрөл
+        </span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input disabled="true" nz-input id="type" formControlName="type" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="userName">
+        <span>
+          Овог нэр
+        </span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input
+          disabled="true"
+          nz-input
+          id="userName"
+          formControlName="userName"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="ownCode">
+        <span>
+          Оюутны код
+        </span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input
+          disabled="true"
+          nz-input
+          id="ownCode"
+          formControlName="ownCode"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="registerNumer">
+        <span>
+          Регистерийн дугаар
+        </span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input
+          disabled="true"
+          nz-input
+          id="registerNumer"
+          formControlName="registerNumer"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="phoneNumber" nzRequired
+        >Утасны дугаар</nz-form-label
+      >
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        [nzValidateStatus]="userForm.controls['phoneNumber']"
+        nzErrorTip="Утасны дугаараа оруулна уу?"
+      >
+        <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="password" nzRequired
+        >Нууц үг</nz-form-label
+      >
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        nzErrorTip="Нууц үгээ оруулна уу?"
+      >
+        <input
+          nz-input
+          type="password"
+          id="password"
+          formControlName="password"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="checkPassword"
+        >Нууц үг</nz-form-label
+      >
+      <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+        <input
+          nz-input
+          type="password"
+          formControlName="checkPassword"
+          id="checkPassword"
+        />
+        <ng-template #errorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Нууц үгээ оруулна уу?
+          </ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">
+            Нууц үг тохирохгүй байна
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="8">
+        <button nz-button nzType="primary">Хадгалах</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

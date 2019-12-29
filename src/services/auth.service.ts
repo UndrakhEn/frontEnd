@@ -8,6 +8,7 @@ import { map, catchError } from "rxjs/operators";
 })
 export class AuthService {
   private URL = "http://localhost:3000/api/user/check";
+  private URL1 = "http://localhost:3000/api/user/update";
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
@@ -46,6 +47,19 @@ export class AuthService {
     localStorage.removeItem("currentUser");
     this.currentUserSubject.next(null);
     // this.router.navigate(['/login'])
+  }
+
+  update(data: any) {
+    return this.http.post<any>(this.URL1, data).pipe(
+      map(res => {
+        if (res.code !== 200) {
+          return null;
+        }
+        localStorage.setItem("currentUser", JSON.stringify(res.result));
+        this.currentUserSubject.next(res.result);
+        return res.result;
+      })
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

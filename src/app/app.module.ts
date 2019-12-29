@@ -15,7 +15,7 @@ import { PostComponent } from "./post/post.component";
 import { PostsComponent } from "./posts/posts.component";
 import { CreatePostComponent } from "./create-post/create-post.component";
 import { PrivateInformationComponent } from "./private-information/private-information.component";
-import { NotificationComponent } from './notification/notification.component';
+import { NotificationComponent } from "./notification/notification.component";
 
 registerLocaleData(mn);
 

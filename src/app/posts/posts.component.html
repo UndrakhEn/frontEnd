@@ -1,16 +1,19 @@
 <div nz-row class="main" *ngFor="let i of listData">
   <div nz-col nzSpan="24">
     <div nz-row>
-      <div nz-col nzSpan="3">
+      <div nz-col nzSpan="2">
         <nz-avatar
           class="postAvatar"
-          nzIcon="user"
+          [nzText]="!i.is_vissible ? i.user[0].f_name.substr(0, 1) : 'О'"
           [nzSize]="48"
           [nzSrc]="i.avatar"
         ></nz-avatar>
       </div>
       <div nz-col nzSpan="15">
-        <h4>{{ i.user[0].f_name }} {{ i.user[0].l_name }}</h4>
+        <h4 *ngIf="!i.is_vissible">
+          {{ i.user[0].f_name }} {{ i.user[0].l_name }}
+        </h4>
+        <h4 *ngIf="i.is_vissible">{{ i.user[0].l_name }}</h4>
         <p>{{ i.created_date | date: "yyyy/M/d HH:mm" }}</p>
       </div>
       <div nz-col nzSpan="6"></div>

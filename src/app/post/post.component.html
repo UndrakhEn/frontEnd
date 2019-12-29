@@ -1,16 +1,19 @@
 <div nz-row class="main">
   <div nz-col nzSpan="24">
     <div nz-row>
-      <div nz-col nzSpan="3">
+      <div nz-col nzSpan="2">
         <nz-avatar
           class="postAvatar"
-          nzIcon="user"
+          [nzText]="!postData['is_vissible'] ? name.f_name.substr(0, 1) : 'О'"
           [nzSize]="48"
           [nzSrc]=""
         ></nz-avatar>
       </div>
       <div nz-col nzSpan="15">
-        <h4>{{ postData.user[0].f_name }} {{ postData.user[0]._name }}</h4>
+        <h4 *ngIf="!postData['is_vissible']">
+          {{ name.f_name }} {{ name.l_name }}
+        </h4>
+        <h4 *ngIf="postData['is_vissible']">Оюутан</h4>
         <p>{{ postData["created_date"] | date: "yyyy/M/d HH:mm" }}</p>
       </div>
       <div nz-col nzSpan="6"></div>
@@ -54,13 +57,12 @@
   <div nz-col nzSpan="24">
     <div *ngFor="let i of commentData">
       <nz-comment
-        [nzAuthor]="i.user_id"
+        [nzAuthor]="i.user[0].l_name + ' ' + i.user[0].f_name"
         [nzDatetime]="i.created_date | date: 'yyyy/M/d HH:mm'"
       >
         <nz-avatar
           nz-comment-avatar
-          nzIcon="userPhoto"
-          nzSrc="/assets/avatar2.jpg"
+          [nzText]="i.user[0].f_name.substr(0, 1)"
         ></nz-avatar>
         <nz-comment-content>
           <p>
