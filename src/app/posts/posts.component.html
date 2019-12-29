@@ -10,7 +10,7 @@
         ></nz-avatar>
       </div>
       <div nz-col nzSpan="15">
-        <h4>{{ i.user_id }}</h4>
+        <h4>{{ i.user[0].f_name }} {{ i.user[0].l_name }}</h4>
         <p>{{ i.created_date | date: "yyyy/M/d HH:mm" }}</p>
       </div>
       <div nz-col nzSpan="6"></div>

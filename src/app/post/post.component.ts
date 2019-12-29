@@ -12,7 +12,7 @@ import { AuthService } from "src/services/auth.service";
 export class PostComponent implements OnInit {
   post_id: string = "";
   loading: boolean = true;
-  postData: Object = {};
+  postData: any = {};
   commentData: Array<any> = [];
   commentForm: FormGroup;
 
@@ -24,7 +24,7 @@ export class PostComponent implements OnInit {
   ) {
     this.post_id = this.route.snapshot.paramMap.get("id");
     this.postService.getPost(this.post_id).subscribe(res => {
-      this.postData = res;
+      this.postData = res[0];
     });
     this.postService.getIdComment(this.post_id).subscribe(res => {
       this.commentData = res;

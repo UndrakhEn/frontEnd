@@ -13,6 +13,7 @@ export class PostsComponent implements OnInit {
   constructor(private postService: PostService) {
     this.postService.getAllPost().subscribe(res => {
       this.listData = res;
+      console.log(res);
     });
   }
 
