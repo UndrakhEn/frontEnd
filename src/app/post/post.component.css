@@ -16,3 +16,12 @@
 .postAvatar {
   margin: 0;
 }
+.post-user {
+  font-weight: bold;
+}
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}

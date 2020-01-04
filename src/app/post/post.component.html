@@ -10,10 +10,12 @@
         ></nz-avatar>
       </div>
       <div nz-col nzSpan="15">
-        <h4 *ngIf="!postData['is_vissible']">
+        <span class="post-user" *ngIf="!postData['is_vissible']">
           {{ name.f_name }} {{ name.l_name }}
-        </h4>
-        <h4 *ngIf="postData['is_vissible']">Оюутан</h4>
+        </span>
+        <span class="post-user" *ngIf="postData['is_vissible']">Оюутан</span>
+        <span class="red" *ngIf="!postData['is_thanks']"> Санал хүсэлт</span>
+        <span class="green" *ngIf="postData['is_thanks']"> Талархал</span>
         <p>{{ postData["created_date"] | date: "yyyy/M/d HH:mm" }}</p>
       </div>
       <div nz-col nzSpan="6"></div>
@@ -22,10 +24,10 @@
       <div nz-col nzSpan="24">
         <p>
           {{ postData["body"] }}
-
+          <!-- 
           <a routerLink="/app/posts"
             ><i nz-icon nzType="left-circle" nzTheme="outline"></i
-          ></a>
+          ></a> -->
         </p>
       </div>
     </div>

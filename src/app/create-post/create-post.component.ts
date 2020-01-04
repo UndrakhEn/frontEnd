@@ -12,98 +12,8 @@ import { Router } from "@angular/router";
 export class CreatePostComponent implements OnInit {
   postForm: FormGroup;
   inputValue: string;
-
-  // webFrameworks = [
-  //   {
-  //     name: "React",
-  //     type: "JavaScript",
-  //     icon: "https://zos.alipayobjects.com/rmsportal/LFIeMPzdLcLnEUe.svg"
-  //   },
-  //   {
-  //     name: "Angular",
-  //     type: "JavaScript",
-  //     icon: "https://zos.alipayobjects.com/rmsportal/PJTbxSvzYWjDZnJ.png"
-  //   },
-  //   {
-  //     name: "Dva",
-  //     type: "Javascript",
-  //     icon: "https://zos.alipayobjects.com/rmsportal/EYPwSeEJKxDtVxI.png"
-  //   },
-  //   {
-  //     name: "Flask",
-  //     type: "Python",
-  //     icon: "https://zos.alipayobjects.com/rmsportal/xaypBUijfnpAlXE.png"
-  //   }
-  // ];
-
-  users = [
-    {
-      _id: "5df89930af20db0a189609e9",
-      avatar: "",
-      f_name: "Ундрах",
-      l_name: "Энхбаатар",
-      own_code: "M.IT16D087",
-      register: "ЛЮ98080601",
-      phone: "94152470",
-      password: "undrakh",
-      type: "student",
-      type_meaning: "Мэдээлэл зүй",
-      __v: 0
-    },
-    {
-      _id: "5df899c8af20db0a189609ea",
-      avatar: "",
-      f_name: "Баярсайхан",
-      l_name: "Отгонбаяр",
-      own_code: "M.IT15D133",
-      register: "ЙК98013033",
-      phone: "99479654",
-      password: "bayrsaikhan",
-      type: "student",
-      type_meaning: "Мэдээлэл зүй",
-      __v: 0
-    },
-    {
-      _id: "5df899fdaf20db0a189609eb",
-      avatar: "",
-      f_name: "Долгоржав",
-      l_name: "Чинбат",
-      own_code: "M.IT408",
-      register: "ИЗ9876543",
-      phone: "99519951",
-      password: "teacher",
-      type: "teacher",
-      type_meaning: "Мэдээлэл зүй",
-      __v: 0
-    },
-    {
-      _id: "5df89a82af20db0a189609ec",
-      avatar: "",
-      f_name: "Нямсүрэн",
-      l_name: "Нямаа",
-      own_code: "M.IT406",
-      register: "ЫО98775428",
-      phone: "88518851",
-      password: "teacher2",
-      type: "teacher",
-      type_meaning: "Мэдээлэл зүй",
-      __v: 0
-    },
-    {
-      _id: "5df89ae2af20db0a189609ed",
-      avatar: "",
-      f_name: "Сарантуяа",
-      l_name: "Баттулга",
-      own_code: "M.IT16D265",
-      register: "ЛҮ98343756",
-      phone: "55674368",
-      password: "student",
-      type: "student",
-      type_meaning: "Мэдээлэл зүй",
-      __v: 0
-    }
-  ];
-
+  users: Array<any> = [];
+  tagged: Array<any> = [];
   valueWith = (data: {
     _id: string;
     avatar: string;
@@ -116,7 +26,11 @@ export class CreatePostComponent implements OnInit {
     private postService: PostService,
     private auth: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this.auth.getAllUser().subscribe((res: any) => {
+      this.users = res;
+    });
+  }
 
   ngOnInit() {
     this.postForm = this.fb.group({
@@ -128,7 +42,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   onSelect(value: string): void {
-    console.log(value);
+    this.tagged.push(value);
   }
 
   newPost(): void {
@@ -136,10 +50,11 @@ export class CreatePostComponent implements OnInit {
       this.postForm.controls[i].markAsDirty();
       this.postForm.controls[i].updateValueAndValidity();
     }
-    console.log(this.postForm.controls.body.value);
+    // console.log(this.postForm.controls.body.value);
+    console.log(this.tagged);
     let data = {
       user_id: this.auth.getUser._id,
-      tagged_user: [],
+      tagged_user: this.tagged,
       body: this.postForm.controls.body.value,
       images: [],
       is_vissible: this.postForm.controls.is_visible.value,

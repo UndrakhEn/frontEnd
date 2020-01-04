@@ -36,6 +36,7 @@
                 nz-input
                 placeholder="Хэрэглэгчийн нэр"
                 formControlName="username"
+                oninput="this.value = this.value.toUpperCase()"
               />
               <ng-template #preUser>
                 <i nz-icon nzType="user"></i>

@@ -1,0 +1,13 @@
+.post-user {
+  font-weight: bold;
+}
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
+.postSend:hover {
+  cursor: pointer;
+  color: rgb(64, 169, 255);
+}

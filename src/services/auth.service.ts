@@ -9,6 +9,7 @@ import { map, catchError } from "rxjs/operators";
 export class AuthService {
   private URL = "http://localhost:3000/api/user/check";
   private URL1 = "http://localhost:3000/api/user/update";
+  private URL2 = "http://localhost:3000/api/user/get";
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
@@ -19,9 +20,19 @@ export class AuthService {
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
-
   public get getUser(): any {
     return this.currentUserSubject.value;
+  }
+
+  public getAllUser(): any {
+    return this.http.post<any>(this.URL2, {}).pipe(
+      map(res => {
+        if (res.code !== 200) {
+          return [];
+        }
+        return res.result;
+      })
+    );
   }
 
   login(own_code: string, password: string) {
