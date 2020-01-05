@@ -13,6 +13,9 @@ export class PostService {
   private URL4 = "http://localhost:3000/api/comment/create";
   private URL5 = "http://localhost:3000/api/post/create";
   private URL6 = "http://localhost:3000/api/post/tagged/get";
+  private URL7 = "http://localhost:3000/api/post/getUserIdAll";
+  private URL8 = "http://localhost:3000/api/post/delete";
+  private URL9 = "http://localhost:3000/api/post/update/perforCode";
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -50,6 +53,19 @@ export class PostService {
         })
       );
   }
+
+  getUserIdPosts(user_id: any) {
+    return this.http
+      .post<any>(this.URL7, { user_id })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return null;
+          }
+          return res.result;
+        })
+      );
+  }
   getTagged() {
     return this.http
       .post<any>(this.URL6, { user_id: this.auth.getUser.id })
@@ -63,6 +79,16 @@ export class PostService {
       );
   }
 
+  postConfirm(data: object) {
+    return this.http.post<any>(this.URL9, data).pipe(
+      map(res => {
+        if (res.code !== 200) {
+          return null;
+        }
+        return res.result;
+      })
+    );
+  }
   createComment(comment: object) {
     return this.http.post<any>(this.URL4, comment).pipe(
       map(res => {
@@ -83,5 +109,17 @@ export class PostService {
         return res.result;
       })
     );
+  }
+  deletePost(id: any) {
+    return this.http
+      .post<any>(this.URL8, { id: id })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return false;
+          }
+          return true;
+        })
+      );
   }
 }

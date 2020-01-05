@@ -11,3 +11,19 @@
   cursor: pointer;
   color: rgb(64, 169, 255);
 }
+h4 {
+  margin-bottom: 16px;
+}
+.underline {
+  color: rgb(64, 169, 255);
+  text-decoration: underline;
+}
+.underline::before {
+  content: "•";
+  font-size: 25px;
+  position: relative;
+  top: 3px;
+  color: orange;
+  display: inline-block;
+  width: 15px;
+}

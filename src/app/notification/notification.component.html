@@ -1,82 +1,67 @@
-<div nz-row class="main" *ngFor="let i of taggedPost">
-  <div nz-col nzSpan="24">
-    <div nz-row>
-      <div nz-col nzSpan="2">
-        <nz-avatar
-          class="postAvatar"
-          [nzText]="!i.is_vissible ? i.user.f_name.substr(0, 1) : 'О'"
-          [nzSize]="48"
-          [nzSrc]="i.avatar"
-        ></nz-avatar>
-      </div>
-      <div nz-col nzSpan="15">
-        <span
-          ><span class="post-user" *ngIf="!i.is_vissible">
-            {{ i.user.l_name }} {{ i.user.f_name }}
-          </span>
-          <span class="post-user" *ngIf="i.is_vissible">Оюутан</span></span
-        >
-        <span class="red" *ngIf="!i.is_thanks"> Санал хүсэлт</span>
-        <span class="green" *ngIf="i.is_thanks"> Талархал</span>
-        <!-- <span *ngFor="let j of i.tagged_user"
-            >{{ j.l_name }} {{ j.f_name }}
-          </span> -->
+<div nz-row class="main">
+  <!-- *ngFor="let i of taggedPost" -->
+  <nz-table #smallTable nzSize="small" [nzData]="taggedPost">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Хэнээс</th>
+        <th>Төрөл</th>
+        <th>Нийтэлсэн хугацаа</th>
+        <th>Шийдэх хугацаа</th>
+        <th>Нийтэд</th>
+        <th>Статус</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of smallTable.data; let j = index">
+        <td>{{ j + 1 }}</td>
+        <td *ngIf="!i.is_vissible">{{ i.user.l_name }} {{ i.user.f_name }}</td>
+        <td *ngIf="i.is_vissible">Оюутан</td>
+        <td *ngIf="!i.is_thanks">Санал хүсэлт</td>
+        <td *ngIf="i.is_thanks">Талархал</td>
+        <td>{{ i.created_date | date: "yyyy/M/d" }}</td>
+        <td>{{ i.deadline | date: "yyyy/M/d" }}</td>
+        <td *ngIf="i.is_public">
+          <i nz-icon nzType="check" nzTheme="outline"></i>
+        </td>
+        <td *ngIf="!i.is_public">
+          <i nz-icon nzType="close" nzTheme="outline"></i>
+        </td>
+        <td *ngIf="i.perfor_code == 'sent'">
+          <nz-badge nzColor="gray" nzText="Ирсэн"></nz-badge>
+        </td>
+        <td *ngIf="i.perfor_code == 'seen'">
+          <a
+            nz-popconfirm
+            nzPopconfirmTitle="Санал хүсэлтийг биелүүлсэн үү?"
+            nzOkText="Тийм"
+            nzCancelText="Үгүй"
+            nzPopconfirmPlacement="bottom"
+            (nzOnConfirm)="postConfirm(i._id)"
+          >
+            <nz-badge class="underline">Биелүүлэх</nz-badge>
+          </a>
+        </td>
+        <td *ngIf="i.perfor_code == 'pending'">
+          <nz-badge nzColor="blue" nzText="Баталгаажаагүй"></nz-badge>
+        </td>
 
-        <p>{{ i.created_date | date: "yyyy/M/d HH:mm" }}</p>
-      </div>
-      <div nz-col nzSpan="6"></div>
-    </div>
-    <div nz-row>
-      <div nz-col nzSpan="24">
-        <p>
-          {{ i.body.substring(0, 230) }}...
-
-          <a routerLink="/app/post/{{ i._id }}"
-            ><i nz-icon nzType="right-circle" nzTheme="outline"></i
+        <td *ngIf="i.perfor_code == 'reject'">
+          <nz-badge nzColor="purple" nzText="Цуцалсан"></nz-badge>
+        </td>
+        <td *ngIf="i.perfor_code == 'done'">
+          <nz-badge nzColor="green" nzText="Баталгаажсан"></nz-badge>
+        </td>
+        <td *ngIf="i.perfor_code == 'fail'">
+          <nz-badge nzColor="red" nzText="Биелүүлээгүй"></nz-badge>
+        </td>
+        <td>
+          <a routerLink="/app/post/{{ i._id }}">
+            <i nz-icon nzType="eye" nzTheme="outline"></i
           ></a>
-        </p>
-      </div>
-    </div>
-    <div nz-row nzGutter="24">
-      <div nz-col nzSpan="12" *ngFor="let j of i.images.slice(0, 2)">
-        <div><img class="img" [src]="j" /></div>
-      </div>
-    </div>
-    <div nz-row>
-      <div nz-col nzSpan="24">
-        <span *ngIf="!i.is_thanks">
-          <span
-            *ngIf="this.is_send"
-            class="postReaction postSend"
-            (click)="send(i._id)"
-          >
-            Илгээсэн
-          </span>
-          <span
-            *ngIf="!this.is_send"
-            class="postReaction postSend"
-            (click)="send(i._id)"
-          >
-            Илгээх
-          </span>
-          <nz-divider nzType="vertical"></nz-divider>
-        </span>
-
-        <span class="postReaction">
-          <i nz-icon nzType="like-o" style="margin-right: 8px;"></i
-          >{{ i.like_cnt }}
-        </span>
-        <nz-divider nzType="vertical"></nz-divider>
-        <span class="postReaction">
-          <i nz-icon nzType="dislike-o" style="margin-right: 8px;"></i
-          >{{ i.dislike_cnt }}
-        </span>
-        <nz-divider nzType="vertical"></nz-divider>
-        <span class="postReaction">
-          <i nz-icon nzType="message" style="margin-right: 8px;"></i>
-          {{ i.comments_cnt }}
-        </span>
-      </div>
-    </div>
-  </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>

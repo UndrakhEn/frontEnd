@@ -60,7 +60,14 @@
         ></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
-
+    <nz-form-item>
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <label nz-checkbox formControlName="agree">
+          <span>Зөвшөөрч байна </span>
+        </label>
+        <a class="info" (click)="info()">дэлгэрэнгүй</a>
+      </nz-form-control>
+    </nz-form-item>
     <nz-form-item>
       <nz-form-control [nzSpan]="16" [nzOffset]="">
         <button nz-button nzType="primary">Илгээх</button>
