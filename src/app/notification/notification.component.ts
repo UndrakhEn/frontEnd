@@ -12,19 +12,14 @@ export class NotificationComponent implements OnInit {
   listData: Array<any> = [];
   taggedPost: Array<any> = [];
   is_send: boolean = false;
+
   constructor(
     private postService: PostService,
     private auth: AuthService,
     private notification: NzNotificationService
   ) {
-    this.postService.getAllPost().subscribe(res => {
-      this.listData = res;
-      this.listData.forEach(i => {
-        i.tagged_user.forEach(j => {
-          if (j._id == this.auth.getUser._id) this.taggedPost.push(i);
-        });
-      });
-      console.log(this.taggedPost);
+    this.postService.getTagged().subscribe(res => {
+      this.taggedPost = res;
     });
   }
 

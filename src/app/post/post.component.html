@@ -4,14 +4,14 @@
       <div nz-col nzSpan="2">
         <nz-avatar
           class="postAvatar"
-          [nzText]="!postData['is_vissible'] ? name.f_name.substr(0, 1) : 'О'"
+          [nzText]="!postData['is_vissible'] ? first_name.substr(0, 1) : 'О'"
           [nzSize]="48"
           [nzSrc]=""
         ></nz-avatar>
       </div>
       <div nz-col nzSpan="15">
         <span class="post-user" *ngIf="!postData['is_vissible']">
-          {{ name.f_name }} {{ name.l_name }}
+          {{ user.l_name }} {{ user.f_name }}
         </span>
         <span class="post-user" *ngIf="postData['is_vissible']">Оюутан</span>
         <span class="red" *ngIf="!postData['is_thanks']"> Санал хүсэлт</span>
@@ -59,12 +59,12 @@
   <div nz-col nzSpan="24">
     <div *ngFor="let i of commentData">
       <nz-comment
-        [nzAuthor]="i.user[0].l_name + ' ' + i.user[0].f_name"
+        [nzAuthor]="i.user.l_name + ' ' + i.user.f_name"
         [nzDatetime]="i.created_date | date: 'yyyy/M/d HH:mm'"
       >
         <nz-avatar
           nz-comment-avatar
-          [nzText]="i.user[0].f_name.substr(0, 1)"
+          [nzText]="i.user.f_name.substr(0, 1)"
         ></nz-avatar>
         <nz-comment-content>
           <p>

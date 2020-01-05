@@ -36,6 +36,7 @@ export class CreatePostComponent implements OnInit {
     this.postForm = this.fb.group({
       body: [null, [Validators.required]],
       deadline: [null],
+      is_public: [false],
       is_visible: [false],
       is_thanks: [false]
     });
@@ -53,10 +54,11 @@ export class CreatePostComponent implements OnInit {
     // console.log(this.postForm.controls.body.value);
     console.log(this.tagged);
     let data = {
-      user_id: this.auth.getUser._id,
+      user: this.auth.getUser,
       tagged_user: this.tagged,
       body: this.postForm.controls.body.value,
       images: [],
+      is_public: this.postForm.controls.is_public.value,
       is_vissible: this.postForm.controls.is_visible.value,
       dislike_cnt: 0,
       like_cnt: 0,

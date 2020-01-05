@@ -15,7 +15,8 @@ export class PostComponent implements OnInit {
   postData: any = {};
   commentData: Array<any> = [];
   commentForm: FormGroup;
-  name: any = {};
+  user: any = {};
+  first_name: string = "";
   commentName: any = {};
   constructor(
     private postService: PostService,
@@ -26,7 +27,8 @@ export class PostComponent implements OnInit {
     this.post_id = this.route.snapshot.paramMap.get("id");
     this.postService.getPost(this.post_id).subscribe(res => {
       this.postData = res[0];
-      this.name = this.postData.user[0];
+      this.user = this.postData.user;
+      this.first_name = this.postData.user.f_name;
     });
     this.postService.getIdComment(this.post_id).subscribe(res => {
       this.commentData = res;
@@ -46,7 +48,7 @@ export class PostComponent implements OnInit {
         post_id: this.post_id,
         body: this.commentForm.controls.comment.value,
         parent_id: "",
-        user_id: this.auth.getUser._id,
+        user: this.auth.getUser,
         dislike_cnt: "0",
         like_cnt: "0",
         replies: []

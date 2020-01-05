@@ -3,6 +3,13 @@
     <!-- is visible -->
     <nz-form-item>
       <nz-form-control [nzSpan]="8" [nzOffset]="0">
+        <label nz-checkbox formControlName="is_public">Нийтэд нийтлэх</label>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- is visible -->
+    <nz-form-item>
+      <nz-form-control [nzSpan]="8" [nzOffset]="0">
         <label nz-checkbox formControlName="is_visible">Нэр нууцлах</label>
       </nz-form-control>
     </nz-form-item>
@@ -47,11 +54,10 @@
     <nz-form-item>
       <nz-form-control [nzSm]="16" [nzXs]="24">
         <nz-date-picker
-          placeholder="Хүчинтэй хугацаа"
+          nzPlaceHolder="Шийдвэрлэх хугацаа"
           formControlName="deadline"
           [nzDisabled]="this.postForm.controls.is_thanks.value"
         ></nz-date-picker>
-        <label> Шийдвэрлэх хугацаа</label>
       </nz-form-control>
     </nz-form-item>
 

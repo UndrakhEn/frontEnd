@@ -4,7 +4,7 @@
       <div nz-col nzSpan="2">
         <nz-avatar
           class="postAvatar"
-          [nzText]="!i.is_vissible ? i.user[0].f_name.substr(0, 1) : 'О'"
+          [nzText]="!i.is_vissible ? i.user.f_name.substr(0, 1) : 'О'"
           [nzSize]="48"
           [nzSrc]="i.avatar"
         ></nz-avatar>
@@ -12,7 +12,7 @@
       <div nz-col nzSpan="15">
         <span
           ><span class="post-user" *ngIf="!i.is_vissible">
-            {{ i.user[0].l_name }} {{ i.user[0].f_name }}
+            {{ i.user.l_name }} {{ i.user.f_name }}
           </span>
           <span class="post-user" *ngIf="i.is_vissible">Оюутан</span>
         </span>

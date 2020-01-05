@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map, catchError } from "rxjs/operators";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root"
@@ -11,8 +12,9 @@ export class PostService {
   private URL3 = "http://localhost:3000/api/comment/getPostId";
   private URL4 = "http://localhost:3000/api/comment/create";
   private URL5 = "http://localhost:3000/api/post/create";
+  private URL6 = "http://localhost:3000/api/post/tagged/get";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   getAllPost() {
     return this.http.post<any>(this.URL, {}).pipe(
@@ -39,6 +41,18 @@ export class PostService {
   getIdComment(post_id: any) {
     return this.http
       .post<any>(this.URL3, { post_id })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return null;
+          }
+          return res.result;
+        })
+      );
+  }
+  getTagged() {
+    return this.http
+      .post<any>(this.URL6, { user_id: this.auth.getUser.id })
       .pipe(
         map(res => {
           if (res.code !== 200) {
