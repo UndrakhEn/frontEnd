@@ -18,6 +18,8 @@ export class PostService {
   private URL9 = "http://localhost:3000/api/post/update/perforCode";
   private URL10 = "http://localhost:3000/api/post/getStudent";
   private URL11 = "http://localhost:3000/api/post/getThanks";
+  private URL12 = "http://localhost:3000/api/post/updateLike";
+  private URL13 = "http://localhost:3000/api/post/updateDisLike";
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -135,6 +137,31 @@ export class PostService {
   deletePost(id: any) {
     return this.http
       .post<any>(this.URL8, { id: id })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return false;
+          }
+          return true;
+        })
+      );
+  }
+  updateLike(id: any, userId: any) {
+    return this.http
+      .post<any>(this.URL12, { id: id, userId: userId })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return false;
+          }
+          return true;
+        })
+      );
+  }
+
+  updateDisLike(id: any, userId: any) {
+    return this.http
+      .post<any>(this.URL13, { id: id, userId: userId })
       .pipe(
         map(res => {
           if (res.code !== 200) {

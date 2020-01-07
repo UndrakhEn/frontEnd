@@ -59,8 +59,8 @@ export class PostComponent implements OnInit {
         body: this.commentForm.controls.comment.value,
         parent_id: "",
         user: this.auth.getUser,
-        dislike_cnt: "0",
-        like_cnt: "0",
+        dislike_cnt: 0,
+        like_cnt: 0,
         replies: []
       })
       .subscribe(res => {

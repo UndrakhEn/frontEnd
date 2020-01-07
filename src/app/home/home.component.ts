@@ -20,14 +20,7 @@ export class HomeComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private postService: PostService
-  ) {
-    this.postService.getAllPost().subscribe(res => {
-      this.element1 = res.length;
-    });
-    this.postService.getThanks().subscribe(res => {
-      this.element2 = res.length;
-    });
-  }
+  ) {}
   ngOnInit() {}
   logout() {
     this.auth.logout();
