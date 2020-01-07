@@ -40,7 +40,7 @@
             nzPopconfirmPlacement="bottom"
             (nzOnConfirm)="postConfirm(i._id)"
           >
-            <nz-badge class="underline">Биелүүлэх</nz-badge>
+            <nz-badge class="underline">Ирсэн</nz-badge>
           </a>
         </td>
         <td *ngIf="i.perfor_code == 'pending'">
@@ -57,7 +57,13 @@
           <nz-badge nzColor="red" nzText="Биелүүлээгүй"></nz-badge>
         </td>
         <td>
-          <a routerLink="/app/post/{{ i._id }}">
+          <a
+            *ngIf="i.perfor_code !== 'sent'"
+            routerLink="/app/post/{{ i._id }}"
+          >
+            <i nz-icon nzType="eye" nzTheme="outline"></i
+          ></a>
+          <a *ngIf="i.perfor_code === 'sent'" (click)="seePost(i._id)">
             <i nz-icon nzType="eye" nzTheme="outline"></i
           ></a>
         </td>

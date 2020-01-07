@@ -24,6 +24,9 @@
       <div nz-col nzSpan="24">
         <p>
           {{ postData["body"] }}
+          <a (click)="back()">
+            <i nz-icon nzType="left-circle" nzTheme="outline"></i>
+          </a>
           <!-- 
           <a routerLink="/app/posts"
             ><i nz-icon nzType="left-circle" nzTheme="outline"></i
@@ -99,7 +102,12 @@
     <form nz-form [formGroup]="commentForm" (ngSubmit)="writeComment()">
       <nz-form-item>
         <nz-form-control>
-          <textarea formControlName="comment" nz-input rows="3"></textarea>
+          <textarea
+            formControlName="comment"
+            nz-input
+            rows="4"
+            placeholder="Хариу тайлбар бичих..."
+          ></textarea>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>

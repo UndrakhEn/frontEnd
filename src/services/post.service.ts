@@ -16,11 +16,33 @@ export class PostService {
   private URL7 = "http://localhost:3000/api/post/getUserIdAll";
   private URL8 = "http://localhost:3000/api/post/delete";
   private URL9 = "http://localhost:3000/api/post/update/perforCode";
+  private URL10 = "http://localhost:3000/api/post/getStudent";
+  private URL11 = "http://localhost:3000/api/post/getThanks";
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
   getAllPost() {
     return this.http.post<any>(this.URL, {}).pipe(
+      map(res => {
+        if (res.code !== 200) {
+          return null;
+        }
+        return res.result;
+      })
+    );
+  }
+  getStudentAllPost() {
+    return this.http.post<any>(this.URL10, {}).pipe(
+      map(res => {
+        if (res.code !== 200) {
+          return null;
+        }
+        return res.result;
+      })
+    );
+  }
+  getThanks() {
+    return this.http.post<any>(this.URL11, {}).pipe(
       map(res => {
         if (res.code !== 200) {
           return null;

@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { PostService } from "src/services/post.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, NavigationStart, Router } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "src/services/auth.service";
-
+import { filter, pairwise } from "rxjs/operators";
 @Component({
   selector: "app-post",
   templateUrl: "./post.component.html",
@@ -21,9 +21,15 @@ export class PostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder,
     private auth: AuthService
   ) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        localStorage.setItem("prevUrl", this.router.url);
+      }
+    });
     this.post_id = this.route.snapshot.paramMap.get("id");
     this.postService.getPost(this.post_id).subscribe(res => {
       this.postData = res[0];
@@ -36,6 +42,10 @@ export class PostComponent implements OnInit {
     });
   }
 
+  back() {
+    console.log("back to ", localStorage.getItem("prevUrl"));
+    this.router.navigate([localStorage.getItem("prevUrl")]);
+  }
   ngOnInit() {
     this.commentForm = this.fb.group({
       comment: [null, [Validators.required]]

@@ -76,27 +76,29 @@
   <nz-layout>
     <nz-content>
       <div nz-row>
-        <div nz-col nzXs="24" nzSm="24" nzMd="18" nzLg="18" nzXl="18">
+        <!-- <div nz-col nzXs="24" nzSm="24" nzMd="1" nzLg="1" nzXl="1"></div> -->
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
           <router-outlet></router-outlet>
         </div>
         <!--  -->
-        <div nz-col nzXs="24" nzSm="24" nzMd="6" nzLg="6" nzXl="6">
-          <div class="statistic">
-            <p style="text-align: justify;">
-              Та өөрийн санал хүсэлтээ илгээхдээ өөрийн нэрийг нууцлах
-              шаардлагатай бол цахим хаяг эсвэл утасны дугаараа үлдээгээрэй.
-              Ингэснээр таньтай эргэн холбогдож асуудлыг тань шийдвэрлэх болно.
-              Иргэн та
-              <i>"Эрүүгийн хуулийн 110 дугаар зүйлийн 1.1-1.6 заалт"</i>,
-              <i>"Эрүүгийн хуулийн 111 дугаар зүйлийн 2.1-2.9 заалт"</i>,
-              <i
-                >"Эрүүгийн хуулийн 110, 111 дүгээр зүйлд заасан гэмт хэргүүдийг
-                ойролцоо төрлийн гэмт хэргээс ялган зүйлчлэх 3.1-3.9 заалтыг"</i
-              >
-              зөрчихгүй байхыг хүсье
-            </p>
-          </div>
-        </div>
+        <!-- <div nz-col nzXs="24" nzSm="24" nzMd="1" nzLg="1" nzXl="1"> -->
+        <!-- <div class="statistic">
+            <nz-row [nzGutter]="24">
+              <nz-col [nzSpan]="12">
+                <nz-statistic
+                  [nzValue]="element1 | number"
+                  [nzTitle]="'Бүх санал хүсэлтийн тоо'"
+                ></nz-statistic>
+              </nz-col>
+              <nz-col [nzSpan]="12">
+                <nz-statistic
+                  [nzValue]="element2 | number: '1.0-2'"
+                  [nzTitle]="'Талархалын тоо'"
+                ></nz-statistic>
+              </nz-col>
+            </nz-row>
+          </div> -->
+        <!-- </div> -->
       </div>
     </nz-content>
   </nz-layout>

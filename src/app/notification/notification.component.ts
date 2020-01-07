@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { PostService } from "src/services/post.service";
 import { AuthService } from "src/services/auth.service";
 import { NzNotificationService } from "ng-zorro-antd/notification";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-notification",
@@ -15,7 +16,8 @@ export class NotificationComponent implements OnInit {
   constructor(
     private postService: PostService,
     private auth: AuthService,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private router: Router
   ) {
     console.log("constructor");
   }
@@ -24,19 +26,19 @@ export class NotificationComponent implements OnInit {
     console.log("init");
     this.postService.getTagged().subscribe(res => {
       this.sent = res;
-      for (let index = 0; index < this.sent.length; index++) {
-        const element = this.sent[index];
-        if (element.perfor_code == "sent") {
-          console.log(element);
-          this.postService
-            .postConfirm({
-              id: element._id,
-              perfor_code: "seen"
-            })
-            .subscribe(res => console.log(res));
-          element.perfor_code = "seen";
-        }
-      }
+      // for (let index = 0; index < this.sent.length; index++) {
+      //   const element = this.sent[index];
+      //   if (element.perfor_code == "sent") {
+      //     console.log(element);
+      //     this.postService
+      //       .postConfirm({
+      //         id: element._id,
+      //         perfor_code: "seen"
+      //       })
+      //       .subscribe(res => console.log(res));
+      //     element.perfor_code = "seen";
+      //   }
+      // }
       this.taggedPost = this.sent;
     });
   }
@@ -64,6 +66,17 @@ export class NotificationComponent implements OnInit {
             "Өгөгдлийн сантай холбогдож чадсангүй"
           );
         }
+      });
+  }
+
+  seePost(id: string): void {
+    this.postService
+      .postConfirm({
+        id,
+        perfor_code: "seen"
+      })
+      .subscribe(res => {
+        if (res) this.router.navigate(["app", "post", id]);
       });
   }
 }

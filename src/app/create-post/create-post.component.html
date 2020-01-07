@@ -3,7 +3,9 @@
     <!-- is visible -->
     <nz-form-item>
       <nz-form-control [nzSpan]="8" [nzOffset]="0">
-        <label nz-checkbox formControlName="is_public">Нийтэд нийтлэх</label>
+        <label nz-checkbox formControlName="is_public"
+          >Нийтэд харагдахаар нийтлэх</label
+        >
       </nz-form-control>
     </nz-form-item>
 
@@ -63,9 +65,9 @@
     <nz-form-item>
       <nz-form-control [nzSm]="16" [nzXs]="24">
         <label nz-checkbox formControlName="agree">
-          <span>Зөвшөөрч байна </span>
+          <span>Зөвшөөрч байна</span>
         </label>
-        <a class="info" (click)="info()">дэлгэрэнгүй</a>
+        ( <a class="info" (click)="info()">дэлгэрэнгүй</a> )
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
