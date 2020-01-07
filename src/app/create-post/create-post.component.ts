@@ -22,6 +22,9 @@ export class CreatePostComponent implements OnInit {
     l_name: string;
   }) => data.l_name + "-" + data.f_name;
 
+  sentence: string = "";
+  common_words = "өө , shit , fuck";
+
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
@@ -50,6 +53,27 @@ export class CreatePostComponent implements OnInit {
     this.tagged.push(value);
   }
 
+  getUncommon(sentence, common) {
+    var wordArr = sentence.match(/\w+/g),
+      commonObj = {},
+      uncommonArr = 0,
+      word,
+      i;
+
+    common = common.split(",");
+    for (i = 0; i < common.length; i++) {
+      commonObj[common[i].trim()] = true;
+    }
+
+    for (i = 0; i < wordArr.length; i++) {
+      word = wordArr[i].trim().toLowerCase();
+      if (commonObj[word]) {
+        uncommonArr = 1;
+      }
+    }
+    return uncommonArr;
+  }
+
   newPost(): void {
     for (const i in this.postForm.controls) {
       this.postForm.controls[i].markAsDirty();
@@ -59,8 +83,10 @@ export class CreatePostComponent implements OnInit {
       this.notification.blank("Анхаар!", "Зөрчлийн тухай хуульийг уншина уу?");
       return;
     }
-    // console.log(this.postForm.controls.body.value);
     console.log(this.tagged);
+    // if (this.postForm.controls.body.value.search("тэнэг") != -1) {
+    //   console.log("bainaaaaaaaaaaaaaa");
+    // }
     let data = {
       user: this.auth.getUser,
       tagged_user: this.tagged,
@@ -74,12 +100,23 @@ export class CreatePostComponent implements OnInit {
       is_thanks: this.postForm.controls.is_thanks.value,
       deadline: this.postForm.controls.deadline.value
     };
-    this.postService.createPost(data).subscribe(res => {
-      if (res) {
-        console.log(res);
-        this.router.navigate(["app", "posts"]);
-      }
-    });
+    if (
+      this.getUncommon(this.postForm.controls.body.value, this.common_words) !=
+      1
+    ) {
+      this.postService.createPost(data).subscribe(res => {
+        if (res) {
+          console.log(res);
+          this.router.navigate(["app", "posts"]);
+        }
+      });
+    } else {
+      this.notification.create(
+        "error",
+        "Анхааруулга",
+        "Та ёс бус үг хэрэглэсэн учир үүнийг нийтлэх боломжгүй тул засаж бичнэ үү?"
+      );
+    }
   }
 
   info(): void {
