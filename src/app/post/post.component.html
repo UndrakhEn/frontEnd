@@ -81,26 +81,18 @@
           </p>
         </nz-comment-content>
         <nz-comment-action>
-          <i
-            nz-tooltip
-            nz-icon
-            nzType="like"
-            [theme]="likes > 0 ? 'twotone' : 'outline'"
-            (click)="like()"
-          ></i>
-          <span class="count like">{{ i.like_cnt }}</span>
+          <a (click)="like2(i._id)">
+            <i nz-tooltip nz-icon nzType="like"></i>
+            <span class="count like">{{ i.like_cnt.length }}</span></a
+          >
         </nz-comment-action>
         <nz-comment-action>
-          <i
-            nz-tooltip
-            nz-icon
-            nzType="dislike"
-            [theme]="dislikes > 0 ? 'twotone' : 'outline'"
-            (click)="dislike()"
-          ></i>
-          <span class="count dislike">{{ i.dislike_cnt }}</span>
+          <a (click)="dislike2(i._id)">
+            <i nz-tooltip nz-icon nzType="dislike"></i>
+            <span class="count dislike">{{ i.dislike_cnt.length }}</span></a
+          >
         </nz-comment-action>
-        <nz-comment-action>хариу бичих</nz-comment-action>
+        <nz-comment-action><a>хариу бичих</a></nz-comment-action>
       </nz-comment>
     </div>
   </div>

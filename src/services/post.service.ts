@@ -11,6 +11,8 @@ export class PostService {
   private URL2 = "http://localhost:3000/api/post/getId";
   private URL3 = "http://localhost:3000/api/comment/getPostId";
   private URL4 = "http://localhost:3000/api/comment/create";
+  private URL14 = "http://localhost:3000/api/comment/like";
+  private URL15 = "http://localhost:3000/api/comment/dislike ";
   private URL5 = "http://localhost:3000/api/post/create";
   private URL6 = "http://localhost:3000/api/post/tagged/get";
   private URL7 = "http://localhost:3000/api/post/getUserIdAll";
@@ -162,6 +164,32 @@ export class PostService {
   updateDisLike(id: any, userId: any) {
     return this.http
       .post<any>(this.URL13, { id: id, userId: userId })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return false;
+          }
+          return true;
+        })
+      );
+  }
+
+  updateLikeComm(id: any, userId: any) {
+    return this.http
+      .post<any>(this.URL14, { id: id, userId: userId })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return false;
+          }
+          return true;
+        })
+      );
+  }
+
+  updateDisLikeComm(id: any, userId: any) {
+    return this.http
+      .post<any>(this.URL15, { id: id, userId: userId })
       .pipe(
         map(res => {
           if (res.code !== 200) {

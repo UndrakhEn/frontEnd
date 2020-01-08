@@ -19,6 +19,8 @@ export class PostComponent implements OnInit {
   user: any = {};
   first_name: string = "";
   commentName: any = {};
+  too: any = {};
+  element: number;
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
@@ -28,6 +30,7 @@ export class PostComponent implements OnInit {
   ) {
     this.getData();
   }
+
   getData() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
@@ -55,6 +58,18 @@ export class PostComponent implements OnInit {
       this.getData();
     });
   }
+  like2(id) {
+    this.postService.updateLikeComm(id, this.auth.getUser.id).subscribe(res => {
+      this.getData();
+    });
+  }
+  dislike2(id) {
+    this.postService
+      .updateDisLikeComm(id, this.auth.getUser.id)
+      .subscribe(res => {
+        this.getData();
+      });
+  }
   back() {
     console.log("back to ", localStorage.getItem("prevUrl"));
     this.router.navigate([localStorage.getItem("prevUrl")]);
@@ -72,8 +87,8 @@ export class PostComponent implements OnInit {
         body: this.commentForm.controls.comment.value,
         parent_id: "",
         user: this.auth.getUser,
-        dislike_cnt: 0,
-        like_cnt: 0,
+        dislike_cnt: [],
+        like_cnt: [],
         replies: []
       })
       .subscribe(res => {
