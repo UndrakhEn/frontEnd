@@ -94,8 +94,8 @@ export class CreatePostComponent implements OnInit {
       images: [],
       is_public: this.postForm.controls.is_public.value,
       is_vissible: this.postForm.controls.is_visible.value,
-      dislike_cnt: 0,
-      like_cnt: 0,
+      dislike_cnt: [],
+      like_cnt: [],
       perfor_code: "sent",
       is_thanks: this.postForm.controls.is_thanks.value,
       deadline: this.postForm.controls.deadline.value

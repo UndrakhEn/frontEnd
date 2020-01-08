@@ -48,21 +48,23 @@
         <a (click)="like(i._id)">
           <span class="postReaction">
             <i nz-icon nzType="like-o" style="margin-right: 8px;"></i
-            >{{ i.like_cnt.length - 1 }}
+            >{{ i.like_cnt.length }}
           </span>
         </a>
         <nz-divider nzType="vertical"></nz-divider>
         <a (click)="dislike(i._id)">
           <span class="postReaction">
             <i nz-icon nzType="dislike-o" style="margin-right: 8px;"></i
-            >{{ i.dislike_cnt.length - 1 }}
+            >{{ i.dislike_cnt.length }}
           </span></a
         >
         <nz-divider nzType="vertical"></nz-divider>
-        <span class="postReaction">
-          <i nz-icon nzType="message" style="margin-right: 8px;"></i>
-          {{ i.comments_cnt }}
-        </span>
+        <a routerLink="/app/post/{{ i._id }}">
+          <span class="postReaction">
+            <i nz-icon nzType="message" style="margin-right: 8px;"></i>
+            {{ i.comments_cnt }}
+          </span></a
+        >
       </div>
     </div>
   </div>

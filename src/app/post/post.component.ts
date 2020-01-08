@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationStart, Router } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "src/services/auth.service";
 import { filter, pairwise } from "rxjs/operators";
+import { Post } from "./post";
 @Component({
   selector: "app-post",
   templateUrl: "./post.component.html",
@@ -25,6 +26,9 @@ export class PostComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService
   ) {
+    this.getData();
+  }
+  getData() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         localStorage.setItem("prevUrl", this.router.url);
@@ -41,7 +45,16 @@ export class PostComponent implements OnInit {
       console.log(this.commentData);
     });
   }
-
+  like(id) {
+    this.postService.updateLike(id, this.auth.getUser.id).subscribe(res => {
+      this.getData();
+    });
+  }
+  dislike(id) {
+    this.postService.updateDisLike(id, this.auth.getUser.id).subscribe(res => {
+      this.getData();
+    });
+  }
   back() {
     console.log("back to ", localStorage.getItem("prevUrl"));
     this.router.navigate([localStorage.getItem("prevUrl")]);

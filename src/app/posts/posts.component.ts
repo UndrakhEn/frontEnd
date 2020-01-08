@@ -39,7 +39,6 @@ export class PostsComponent implements OnInit {
       this.getData();
     });
   }
-
   dislike(id) {
     this.postService.updateDisLike(id, this.auth.getUser.id).subscribe(res => {
       this.getData();
