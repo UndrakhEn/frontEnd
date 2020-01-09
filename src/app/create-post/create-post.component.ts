@@ -23,7 +23,7 @@ export class CreatePostComponent implements OnInit {
   }) => data.l_name + "-" + data.f_name;
 
   sentence: string = "";
-  common_words = "өө , shit , fuck";
+  common_words = ["зайл", "хуц", "писда", "новш", "сда"];
 
   constructor(
     private fb: FormBuilder,
@@ -54,23 +54,13 @@ export class CreatePostComponent implements OnInit {
   }
 
   getUncommon(sentence, common) {
-    var wordArr = sentence.match(/\w+/g),
-      commonObj = {},
-      uncommonArr = 0,
-      word,
-      i;
-
-    common = common.split(",");
-    for (i = 0; i < common.length; i++) {
-      commonObj[common[i].trim()] = true;
-    }
-
-    for (i = 0; i < wordArr.length; i++) {
-      word = wordArr[i].trim().toLowerCase();
-      if (commonObj[word]) {
-        uncommonArr = 1;
-      }
-    }
+    var words = sentence.split(" ");
+    let uncommonArr = 0;
+    words.forEach(ug => {
+      common.forEach(boldgui => {
+        if (ug.includes(boldgui)) uncommonArr = 1;
+      });
+    });
     return uncommonArr;
   }
 
@@ -84,9 +74,6 @@ export class CreatePostComponent implements OnInit {
       return;
     }
     console.log(this.tagged);
-    // if (this.postForm.controls.body.value.search("тэнэг") != -1) {
-    //   console.log("bainaaaaaaaaaaaaaa");
-    // }
     let data = {
       user: this.auth.getUser,
       tagged_user: this.tagged,

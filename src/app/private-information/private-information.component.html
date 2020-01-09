@@ -1,80 +1,152 @@
-<div nz-row class="main">
-  <nz-table #smallTable nzSize="small" [nzData]="data1">
-    <thead>
-      <tr>
-        <th>№</th>
-        <th>Төрөл</th>
-        <th>Шийдэх хугацаа</th>
-        <th>Нийтэд</th>
-        <th>Нууцалсан</th>
-        <th>Статус</th>
-        <th>Үйлдэл</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let i of smallTable.data; let j = index">
-        <td>{{ j + 1 }}</td>
-        <td *ngIf="!i.is_thanks">Санал хүсэлт</td>
-        <td *ngIf="i.is_thanks">Талархал</td>
-        <td>{{ i.deadline | date: "yyyy/M/d" }}</td>
-        <td *ngIf="i.is_public">
-          <i nz-icon nzType="check" nzTheme="outline"></i>
-        </td>
-        <td *ngIf="!i.is_public">
-          <i nz-icon nzType="close" nzTheme="outline"></i>
-        </td>
-        <td *ngIf="i.is_vissible">
-          <i nz-icon nzType="check" nzTheme="outline"></i>
-        </td>
-        <td *ngIf="!i.is_vissible">
-          <i nz-icon nzType="close" nzTheme="outline"></i>
-        </td>
-        <td *ngIf="i.perfor_code == 'sent'">
-          <nz-badge nzColor="gray" nzText="Илгээгдсэн"></nz-badge>
-        </td>
-        <td *ngIf="i.perfor_code == 'seen'">
-          <nz-badge nzColor="blue" nzText="Харсан"></nz-badge>
-        </td>
-        <td *ngIf="i.perfor_code == 'reject'">
-          <nz-badge nzColor="purple" nzText="Цуцалсан"></nz-badge>
-        </td>
-        <td *ngIf="i.perfor_code == 'pending'">
-          <a
-            nz-popconfirm
-            nzPopconfirmTitle="Санал хүсэлтийг биелүүлсэн үү?"
-            nzOkText="Тийм"
-            nzCancelText="Үгүй"
-            nzPopconfirmPlacement="bottom"
-            (nzOnConfirm)="postConfirm(i._id, 'done')"
-            (nzOnCancel)="postConfirm(i._id, 'reject')"
+<div class="main">
+  <form nz-form [formGroup]="filterForm" (ngSubmit)="filterData()">
+    <div nz-row nz-row nzType="flex" nzJustify="start" class="filterForm">
+      <div nz-col nzXs="24" nzSm="24" nzMd="6" nzLg="6" nzXl="6">
+        <!-- Төрөл -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24"> Төрөл</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Сонгох ..."
+              formControlName="postType"
+            >
+              <nz-option nzLabel="Талархал" [nzValue]="true"></nz-option>
+              <nz-option nzLabel="Санал хүсэлт" [nzValue]="false"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="6" nzLg="6" nzXl="6">
+        <!-- Төлөв-->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24"> Төлөв</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Сонгох ..."
+              id="userRole"
+              formControlName="postStatus"
+            >
+              <nz-option nzValue="seen" nzLabel="Харсан"></nz-option>
+              <nz-option nzValue="reject" nzLabel="Цуцалсан"></nz-option>
+              <nz-option nzValue="sent" nzLabel="Илгээгдсэн"></nz-option>
+              <nz-option nzValue="pending" nzLabel="Баталгаажуулах"></nz-option>
+              <nz-option nzValue="done" nzLabel="Баталгаажуулсан"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="10" nzLg="10" nzXl="10">
+        <!--  Шийдэх хугацаа-->
+        <nz-form-item>
+          <nz-form-label [nzSm]="8" [nzXs]="24">
+            Шийдэх хугацаа
+          </nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-range-picker formControlName="postDeadline"></nz-range-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="2" nzLg="2" nzXl="2">
+        <div class="filter-buttons">
+          <button nz-button nzType="default" nzSize="default" type="submit">
+            <i nz-icon nzType="filter"></i>
+          </button>
+          <button
+            nz-button
+            nzType="default"
+            nzSize="default"
+            type="button"
+            (click)="resetData()"
           >
-            <nz-badge class="underline">Баталгаажуулах</nz-badge></a
-          >
-        </td>
-        <td *ngIf="i.perfor_code == 'done'">
-          <nz-badge nzColor="green" nzText="Баталгаажуулсан"></nz-badge>
-        </td>
-        <td *ngIf="i.perfor_code == 'fail'">
-          <nz-badge nzColor="red" nzText="Биелэгдээгүй"></nz-badge>
-        </td>
-        <td>
-          <a routerLink="/app/post/{{ i._id }}">
-            <i nz-icon nzType="eye" nzTheme="outline"></i
-          ></a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a
-            nz-popconfirm
-            nzPopconfirmTitle="Итгэлтэй байна уу?"
-            nzOkText="Тийм"
-            nzCancelText="Үгүй"
-            (nzOnConfirm)="delete(i._id)"
-            nzPopconfirmPlacement="leftTop"
-          >
-            <i nz-icon nzType="delete" nzTheme="outline"></i
-          ></a>
-        </td>
-      </tr>
-    </tbody>
-  </nz-table>
+            <i nz-icon nzType="reload"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div nz-row>
+    <nz-table #smallTable nzSize="small" [nzData]="data1">
+      <thead>
+        <tr>
+          <th>№</th>
+          <th>Төрөл</th>
+          <th>Шийдэх хугацаа</th>
+          <th>Нийтэд</th>
+          <th>Нууцалсан</th>
+          <th>Статус</th>
+          <th>Үйлдэл</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of smallTable.data; let j = index">
+          <td>{{ j + 1 }}</td>
+          <td *ngIf="!i.is_thanks">Санал хүсэлт</td>
+          <td *ngIf="i.is_thanks">Талархал</td>
+          <td>{{ i.deadline | date: "yyyy/M/d" }}</td>
+          <td *ngIf="i.is_public">
+            <i nz-icon nzType="check" nzTheme="outline"></i>
+          </td>
+          <td *ngIf="!i.is_public">
+            <i nz-icon nzType="close" nzTheme="outline"></i>
+          </td>
+          <td *ngIf="i.is_vissible">
+            <i nz-icon nzType="check" nzTheme="outline"></i>
+          </td>
+          <td *ngIf="!i.is_vissible">
+            <i nz-icon nzType="close" nzTheme="outline"></i>
+          </td>
+          <td *ngIf="i.perfor_code == 'sent'">
+            <nz-badge nzColor="gray" nzText="Илгээгдсэн"></nz-badge>
+          </td>
+          <td *ngIf="i.perfor_code == 'seen'">
+            <nz-badge nzColor="blue" nzText="Харсан"></nz-badge>
+          </td>
+          <td *ngIf="i.perfor_code == 'reject'">
+            <nz-badge nzColor="purple" nzText="Цуцалсан"></nz-badge>
+          </td>
+          <td *ngIf="i.perfor_code == 'pending'">
+            <a
+              nz-popconfirm
+              nzPopconfirmTitle="Санал хүсэлтийг биелүүлсэн үү?"
+              nzOkText="Тийм"
+              nzCancelText="Үгүй"
+              nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="postConfirm(i._id, 'done')"
+              (nzOnCancel)="postConfirm(i._id, 'reject')"
+            >
+              <nz-badge class="underline">Баталгаажуулах</nz-badge></a
+            >
+          </td>
+          <td *ngIf="i.perfor_code == 'done'">
+            <nz-badge nzColor="green" nzText="Баталгаажуулсан"></nz-badge>
+          </td>
+          <td *ngIf="i.perfor_code == 'fail'">
+            <nz-badge nzColor="red" nzText="Биелэгдээгүй"></nz-badge>
+          </td>
+          <td>
+            <a routerLink="/app/post/{{ i._id }}">
+              <i nz-icon nzType="eye" nzTheme="outline"></i
+            ></a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a
+              nz-popconfirm
+              nzPopconfirmTitle="Итгэлтэй байна уу?"
+              nzOkText="Тийм"
+              nzCancelText="Үгүй"
+              (nzOnConfirm)="delete(i._id)"
+              nzPopconfirmPlacement="leftTop"
+            >
+              <i nz-icon nzType="delete" nzTheme="outline"></i
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <!-- <button nz-button (click)="createNotification('success')">Success</button> -->
 </div>
-<!-- <button nz-button (click)="createNotification('success')">Success</button> -->
