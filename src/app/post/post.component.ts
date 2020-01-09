@@ -21,6 +21,9 @@ export class PostComponent implements OnInit {
   commentName: any = {};
   too: any = {};
   element: number;
+  like_count: number = 0;
+  unlike_count: number = 0;
+  comment_count: number = 0;
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
@@ -41,11 +44,13 @@ export class PostComponent implements OnInit {
     this.postService.getPost(this.post_id).subscribe(res => {
       this.postData = res[0];
       this.user = this.postData.user;
+      this.like_count = this.postData.like_cnt.length;
+      this.unlike_count = this.postData.dislike_cnt.length;
       this.first_name = this.postData.user.f_name;
     });
     this.postService.getIdComment(this.post_id).subscribe(res => {
       this.commentData = res;
-      console.log(this.commentData);
+      this.comment_count = this.commentData.length;
     });
   }
   like(id) {
@@ -94,9 +99,7 @@ export class PostComponent implements OnInit {
       .subscribe(res => {
         if (res) {
           this.commentForm.reset();
-          this.postService.getIdComment(this.post_id).subscribe(res => {
-            this.commentData = res;
-          });
+          this.getData();
         }
       });
   }

@@ -15,12 +15,17 @@ export class HomeComponent implements OnInit {
   element1: number;
   element2: number;
   listData: Array<any> = [];
+  bool: boolean = false;
   constructor(
     private modal: NzModalService,
     private auth: AuthService,
     private router: Router,
     private postService: PostService
-  ) {}
+  ) {
+    if (this.auth.getUser.own_code.length === 10) {
+      this.bool = true;
+    }
+  }
   ngOnInit() {}
   logout() {
     this.auth.logout();

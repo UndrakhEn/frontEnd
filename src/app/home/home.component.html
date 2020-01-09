@@ -52,6 +52,18 @@
 
       <li
         nz-menu-item
+        routerLink="/app/statistic"
+        *ngIf="!bool"
+        [nzTitle]="isCollapsed ? 'Статистик мэдээлэл' : ''"
+        nzPlacement="right"
+        nz-tooltip
+      >
+        <i nz-icon nzType="stock" nzTheme="outline"></i>
+        <span>Статистик мэдээлэл</span>
+      </li>
+
+      <li
+        nz-menu-item
         [nzTitle]="isCollapsed ? 'Гарах' : ''"
         nzPlacement="right"
         nz-tooltip

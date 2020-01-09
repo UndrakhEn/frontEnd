@@ -16,6 +16,7 @@ import { PostsComponent } from "./posts/posts.component";
 import { CreatePostComponent } from "./create-post/create-post.component";
 import { PrivateInformationComponent } from "./private-information/private-information.component";
 import { NotificationComponent } from "./notification/notification.component";
+import { StatisticComponent } from './statistic/statistic.component';
 
 registerLocaleData(mn);
 
@@ -28,7 +29,8 @@ registerLocaleData(mn);
     PostsComponent,
     CreatePostComponent,
     PrivateInformationComponent,
-    NotificationComponent
+    NotificationComponent,
+    StatisticComponent
   ],
   imports: [
     BrowserModule,
