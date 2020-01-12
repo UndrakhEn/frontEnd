@@ -4,6 +4,7 @@ import { PostService } from "src/services/post.service";
 import { AuthService } from "src/services/auth.service";
 import { Router } from "@angular/router";
 import { NzModalService, NzNotificationService } from "ng-zorro-antd";
+import { UploadFile } from "ng-zorro-antd/upload";
 
 @Component({
   selector: "app-create-post",
@@ -20,7 +21,8 @@ export class CreatePostComponent implements OnInit {
     avatar: string;
     f_name: string;
     l_name: string;
-  }) => data.l_name + "-" + data.f_name;
+    own_code: string;
+  }) => data.l_name + "-" + data.f_name + "/" + data.own_code;
 
   sentence: string = "";
   common_words = ["зайл", "хуц", "писда", "новш", "сда"];
@@ -78,7 +80,7 @@ export class CreatePostComponent implements OnInit {
       user: this.auth.getUser,
       tagged_user: this.tagged,
       body: this.postForm.controls.body.value,
-      images: [],
+      images: this.imgList,
       is_public: this.postForm.controls.is_public.value,
       is_vissible: this.postForm.controls.is_visible.value,
       dislike_cnt: [],
@@ -114,4 +116,18 @@ export class CreatePostComponent implements OnInit {
       nzOnOk: () => console.log("Info OK")
     });
   }
+
+  showUploadList = {
+    showPreviewIcon: true,
+    showRemoveIcon: true,
+    hidePreviewIconInNonImage: true
+  };
+  imgList = [];
+  previewImage: string | undefined = "";
+  previewVisible = false;
+  handlePreview = (file: UploadFile) => {
+    this.previewImage = file.url || file.thumbUrl;
+    this.previewVisible = true;
+    console.log(this.imgList);
+  };
 }

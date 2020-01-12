@@ -131,9 +131,7 @@ export class PrivateInformationComponent implements OnInit {
         }
       } else if (
         this.filterForm.controls.postStatus.value != null &&
-        this.filterForm.controls.postDeadline.value[0]
-          .toISOString()
-          .substring(0, 10) != null
+        this.filterForm.controls.postDeadline.value != null
       ) {
         if (
           i.perfor_code == this.filterForm.controls.postStatus.value &&

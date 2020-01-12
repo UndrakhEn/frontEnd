@@ -1,4 +1,73 @@
 <div nz-row class="main">
+  <form nz-form [formGroup]="filterForm" (ngSubmit)="filterData()">
+    <div nz-row nz-row nzType="flex" nzJustify="start" class="filterForm">
+      <div nz-col nzXs="24" nzSm="24" nzMd="6" nzLg="6" nzXl="6">
+        <!-- Төрөл -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24"> Төрөл</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Сонгох ..."
+              formControlName="postType"
+            >
+              <nz-option nzLabel="Талархал" [nzValue]="true"></nz-option>
+              <nz-option nzLabel="Санал хүсэлт" [nzValue]="false"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="6" nzLg="6" nzXl="6">
+        <!-- Төлөв-->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24"> Төлөв</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Сонгох ..."
+              id="userRole"
+              formControlName="postStatus"
+            >
+              <nz-option nzValue="seen" nzLabel="Харсан"></nz-option>
+              <nz-option nzValue="reject" nzLabel="Цуцалсан"></nz-option>
+              <nz-option nzValue="sent" nzLabel="Илгээгдсэн"></nz-option>
+              <nz-option nzValue="pending" nzLabel="Баталгаажуулах"></nz-option>
+              <nz-option nzValue="done" nzLabel="Баталгаажуулсан"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="10" nzLg="10" nzXl="10">
+        <!--  Шийдэх хугацаа-->
+        <nz-form-item>
+          <nz-form-label [nzSm]="8" [nzXs]="24">
+            Шийдэх хугацаа
+          </nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-range-picker formControlName="postDeadline"></nz-range-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="2" nzLg="2" nzXl="2">
+        <div class="filter-buttons">
+          <button nz-button nzType="default" nzSize="default" type="submit">
+            <i nz-icon nzType="filter"></i>
+          </button>
+          <button
+            nz-button
+            nzType="default"
+            nzSize="default"
+            type="button"
+            (click)="resetData()"
+          >
+            <i nz-icon nzType="reload"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
   <!-- *ngFor="let i of taggedPost" -->
   <nz-table #smallTable nzSize="small" [nzData]="taggedPost">
     <thead>
@@ -40,7 +109,7 @@
             nzPopconfirmPlacement="bottom"
             (nzOnConfirm)="postConfirm(i._id)"
           >
-            <nz-badge class="underline">Ирсэн</nz-badge>
+            <nz-badge class="underline">Баталгаажуулах</nz-badge>
           </a>
         </td>
         <td *ngIf="i.perfor_code == 'pending'">

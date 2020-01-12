@@ -34,11 +34,11 @@
         </p>
       </div>
     </div>
-    <!-- <div nz-row nzGutter="24">
-      <div nz-col nzSpan="12" *ngFor="let j of postData['images'].slice(0, 2)">
-        <div><img class="img" [src]="j" /></div>
+    <div nz-row nzGutter="24">
+      <div nz-col nzSpan="12" *ngFor="let j of postData['images']">
+        <div><img class="img" [src]="j.thumbUrl" /></div>
       </div>
-    </div> -->
+    </div>
     <div nz-row>
       <div nz-col nzSpan="24">
         <a (click)="like(postData['_id'])">
@@ -66,7 +66,7 @@
   </div>
 
   <div nz-col nzSpan="24">
-    <div *ngFor="let i of commentData">
+    <div *ngFor="let i of commentData; let j = index">
       <nz-comment
         [nzAuthor]="i.user.l_name + ' ' + i.user.f_name"
         [nzDatetime]="i.created_date | date: 'yyyy/M/d HH:mm'"
@@ -92,10 +92,62 @@
             <span class="count dislike">{{ i.dislike_cnt.length }}</span></a
           >
         </nz-comment-action>
-        <nz-comment-action><a>хариу бичих</a></nz-comment-action>
+        <nz-comment-action
+          ><a (click)="toggleShow(j)">хариу бичих</a></nz-comment-action
+        >
       </nz-comment>
+      <div class="replies">
+        <div *ngFor="let item of i.replies">
+          <nz-comment
+            [nzAuthor]="item.user.l_name + ' ' + item.user.f_name"
+            [nzDatetime]="item.created_date | date: 'yyyy/M/d HH:mm'"
+          >
+            <nz-avatar
+              nz-comment-avatar
+              [nzText]="item.user.f_name.substr(0, 1)"
+            ></nz-avatar>
+            <nz-comment-content>
+              <p>
+                {{ item.body }}
+              </p>
+            </nz-comment-content>
+            <nz-comment-action>
+              <a (click)="like2(item._id)">
+                <i nz-tooltip nz-icon nzType="like"></i>
+                <span class="count like">{{ item.like_cnt.length }}</span></a
+              >
+            </nz-comment-action>
+            <nz-comment-action>
+              <a (click)="dislike2(item._id)">
+                <i nz-tooltip nz-icon nzType="dislike"></i>
+                <span class="count dislike">{{
+                  item.dislike_cnt.length
+                }}</span></a
+              >
+            </nz-comment-action>
+          </nz-comment>
+        </div>
+      </div>
+      <div *ngIf="i.isShow" class="repl">
+        <textarea
+          nz-input
+          rows="3"
+          placeholder="Хариу бичих"
+          [(ngModel)]="repl"
+        ></textarea>
+        <button
+          nz-button
+          [nzLoading]="submitting"
+          [disabled]="repl == ''"
+          nzType="primary"
+          (click)="replay(i._id)"
+        >
+          Хариулах
+        </button>
+      </div>
     </div>
   </div>
+
   <div nz-col nzSpan="24">
     <form nz-form [formGroup]="commentForm" (ngSubmit)="writeComment()">
       <nz-form-item>
@@ -115,7 +167,7 @@
             nzType="primary"
             [disabled]="this.commentForm.invalid"
           >
-            Илгээх
+            Хариулах
           </button>
         </nz-form-control>
       </nz-form-item>

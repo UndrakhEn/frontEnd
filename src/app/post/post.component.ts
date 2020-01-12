@@ -24,6 +24,9 @@ export class PostComponent implements OnInit {
   like_count: number = 0;
   unlike_count: number = 0;
   comment_count: number = 0;
+  repl: string = "";
+  submitting: boolean = false;
+
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
@@ -49,36 +52,48 @@ export class PostComponent implements OnInit {
       this.first_name = this.postData.user.f_name;
     });
     this.postService.getIdComment(this.post_id).subscribe(res => {
-      this.commentData = res;
-      this.comment_count = this.commentData.length;
+      if (res) {
+        this.commentData = res;
+        this.commentData.forEach(i => {
+          i.isShow = false;
+        });
+        console.log(this.commentData);
+        this.comment_count = this.commentData.length;
+      }
     });
   }
-  like(id) {
+
+  like(id: any) {
     this.postService.updateLike(id, this.auth.getUser.id).subscribe(res => {
       this.getData();
     });
   }
-  dislike(id) {
+
+  dislike(id: any) {
     this.postService.updateDisLike(id, this.auth.getUser.id).subscribe(res => {
       this.getData();
     });
   }
-  like2(id) {
+
+  like2(id: any) {
     this.postService.updateLikeComm(id, this.auth.getUser.id).subscribe(res => {
       this.getData();
     });
   }
-  dislike2(id) {
+
+  dislike2(id: any) {
     this.postService
       .updateDisLikeComm(id, this.auth.getUser.id)
       .subscribe(res => {
         this.getData();
       });
   }
+
   back() {
     console.log("back to ", localStorage.getItem("prevUrl"));
     this.router.navigate([localStorage.getItem("prevUrl")]);
   }
+
   ngOnInit() {
     this.commentForm = this.fb.group({
       comment: [null, [Validators.required]]
@@ -101,6 +116,33 @@ export class PostComponent implements OnInit {
           this.commentForm.reset();
           this.getData();
         }
+      });
+  }
+
+  toggleShow(index: number): void {
+    this.commentData[index].isShow = !this.commentData[index].isShow;
+  }
+
+  replay(p_id: string): void {
+    this.submitting = true;
+    console.log("repling...", p_id);
+    console.log(this.repl);
+    this.postService
+      .createComment({
+        post_id: this.post_id,
+        body: this.repl,
+        parent_id: p_id,
+        user: this.auth.getUser,
+        dislike_cnt: [],
+        like_cnt: [],
+        replies: []
+      })
+      .subscribe(res => {
+        if (res) {
+          this.repl = "";
+          this.getData();
+        }
+        this.submitting = false;
       });
   }
 }

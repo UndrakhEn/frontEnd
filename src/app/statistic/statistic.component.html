@@ -1,1 +1,44 @@
-<div nz-row class="main"><p>statistic works!</p></div>
+<div nz-row class="main">
+  <h2>Таньд ирсэн санал хүсэлтийн статусын график</h2>
+  <!-- ooriin graphik -->
+  <div class="chart-wrapper">
+    <canvas
+      baseChart
+      [data]="pieChartData"
+      [labels]="pieChartLabels"
+      [chartType]="pieChartType"
+      [options]="pieChartOptions"
+      [plugins]="pieChartPlugins"
+      [legend]="pieChartLegend"
+      [colors]="pieChartColors"
+    >
+    </canvas>
+  </div>
+  <!-- tenhmiin erhlegchiin graphic -->
+  <h2>Тэнхимүүдэд ирсэн санал хүсэлтийн статусын график</h2>
+  <div class="chart-wrapper">
+    <canvas
+      baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType"
+      [colors]="barChartColors"
+    >
+    </canvas>
+  </div>
+
+  <!-- bagsh nar -->
+  <h2>Багш нарт ирсэн санал хүсэлтийн статусын график</h2>
+  <div class="chart-wrapper">
+    <canvas
+      baseChart
+      [data]="doughnutChartData"
+      [labels]="doughnutChartLabels"
+      [chartType]="doughnutChartType"
+    >
+    </canvas>
+  </div>
+</div>

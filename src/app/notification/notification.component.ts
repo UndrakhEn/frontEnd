@@ -3,6 +3,7 @@ import { PostService } from "src/services/post.service";
 import { AuthService } from "src/services/auth.service";
 import { NzNotificationService } from "ng-zorro-antd/notification";
 import { Router } from "@angular/router";
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-notification",
@@ -10,6 +11,10 @@ import { Router } from "@angular/router";
   styleUrls: ["./notification.component.css"]
 })
 export class NotificationComponent implements OnInit {
+  filteredData: Array<any> = [];
+  filterForm: FormGroup;
+  data1: Array<any> = [];
+  mainData: Array<any> = [];
   listData: Array<any> = [];
   taggedPost: Array<any> = [];
   sent: Array<any> = [];
@@ -19,33 +24,21 @@ export class NotificationComponent implements OnInit {
     private notification: NzNotificationService,
     private router: Router
   ) {
-    console.log("constructor");
+    this.filterForm = new FormGroup({
+      postType: new FormControl(null),
+      postStatus: new FormControl(null),
+      postDeadline: new FormControl(null)
+    });
   }
 
   ngOnInit() {
-    console.log("init");
-    this.postService.getTagged().subscribe(res => {
-      this.sent = res;
-      // for (let index = 0; index < this.sent.length; index++) {
-      //   const element = this.sent[index];
-      //   if (element.perfor_code == "sent") {
-      //     console.log(element);
-      //     this.postService
-      //       .postConfirm({
-      //         id: element._id,
-      //         perfor_code: "seen"
-      //       })
-      //       .subscribe(res => console.log(res));
-      //     element.perfor_code = "seen";
-      //   }
-      // }
-      this.taggedPost = this.sent;
-    });
+    this.getData();
   }
 
   getData(): void {
     this.postService.getTagged().subscribe(res => {
       this.taggedPost = res;
+      this.mainData = res;
     });
   }
   postConfirm(id: string): void {
@@ -78,5 +71,101 @@ export class NotificationComponent implements OnInit {
       .subscribe(res => {
         if (res) this.router.navigate(["app", "post", id]);
       });
+  }
+
+  filterData(): void {
+    this.filteredData = [];
+    console.log("filtering...");
+    this.mainData.forEach(i => {
+      if (
+        this.filterForm.controls.postType.value != null &&
+        this.filterForm.controls.postStatus.value != null &&
+        this.filterForm.controls.postDeadline.value != null
+      ) {
+        if (
+          i.is_thanks === this.filterForm.controls.postType.value &&
+          i.perfor_code == this.filterForm.controls.postStatus.value &&
+          i.deadline >=
+            this.filterForm.controls.postDeadline.value[0]
+              .toISOString()
+              .substring(0, 10) &&
+          i.deadline <=
+            this.filterForm.controls.postDeadline.value[1]
+              .toISOString()
+              .substring(0, 10)
+        ) {
+          this.filteredData.push(i);
+        }
+      } else if (
+        this.filterForm.controls.postType.value != null &&
+        this.filterForm.controls.postStatus.value != null
+      ) {
+        if (
+          i.is_thanks === this.filterForm.controls.postType.value &&
+          i.perfor_code == this.filterForm.controls.postStatus.value
+        ) {
+          this.filteredData.push(i);
+        }
+      } else if (
+        this.filterForm.controls.postType.value != null &&
+        this.filterForm.controls.postDeadline.value != null
+      ) {
+        if (
+          i.is_thanks === this.filterForm.controls.postType.value &&
+          i.deadline >=
+            this.filterForm.controls.postDeadline.value[0]
+              .toISOString()
+              .substring(0, 10) &&
+          i.deadline <=
+            this.filterForm.controls.postDeadline.value[1]
+              .toISOString()
+              .substring(0, 10)
+        ) {
+          this.filteredData.push(i);
+        }
+      } else if (
+        this.filterForm.controls.postStatus.value != null &&
+        this.filterForm.controls.postDeadline.value != null
+      ) {
+        if (
+          i.perfor_code == this.filterForm.controls.postStatus.value &&
+          i.deadline >=
+            this.filterForm.controls.postDeadline.value[0]
+              .toISOString()
+              .substring(0, 10) &&
+          i.deadline <=
+            this.filterForm.controls.postDeadline.value[1]
+              .toISOString()
+              .substring(0, 10)
+        ) {
+          this.filteredData.push(i);
+        }
+      } else if (this.filterForm.controls.postDeadline.value != null) {
+        if (
+          i.is_thanks === this.filterForm.controls.postType.value ||
+          i.perfor_code == this.filterForm.controls.postStatus.value ||
+          (i.deadline >=
+            this.filterForm.controls.postDeadline.value[0]
+              .toISOString()
+              .substring(0, 10) &&
+            i.deadline <=
+              this.filterForm.controls.postDeadline.value[1]
+                .toISOString()
+                .substring(0, 10))
+        )
+          this.filteredData.push(i);
+      } else {
+        if (
+          i.is_thanks === this.filterForm.controls.postType.value ||
+          i.perfor_code == this.filterForm.controls.postStatus.value
+        )
+          this.filteredData.push(i);
+      }
+    });
+    this.taggedPost = this.filteredData;
+  }
+  resetData(): void {
+    this.filterForm.reset();
+    this.taggedPost = this.mainData;
   }
 }

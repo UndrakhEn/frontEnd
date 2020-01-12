@@ -11,8 +11,6 @@ export class PostService {
   private URL2 = "http://localhost:3000/api/post/getId";
   private URL3 = "http://localhost:3000/api/comment/getPostId";
   private URL4 = "http://localhost:3000/api/comment/create";
-  private URL14 = "http://localhost:3000/api/comment/like";
-  private URL15 = "http://localhost:3000/api/comment/dislike ";
   private URL5 = "http://localhost:3000/api/post/create";
   private URL6 = "http://localhost:3000/api/post/tagged/get";
   private URL7 = "http://localhost:3000/api/post/getUserIdAll";
@@ -22,6 +20,12 @@ export class PostService {
   private URL11 = "http://localhost:3000/api/post/getThanks";
   private URL12 = "http://localhost:3000/api/post/updateLike";
   private URL13 = "http://localhost:3000/api/post/updateDisLike";
+  private URL14 = "http://localhost:3000/api/comment/like";
+  private URL15 = "http://localhost:3000/api/comment/dislike ";
+  private URL16 = "http://localhost:3000/api/post/c";
+  private URL17 = "http://localhost:3000/api/post/b2";
+  private URL18 = "http://localhost:3000/api/post/b1";
+  private URL19 = "http://localhost:3000/api/post/a";
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
@@ -67,6 +71,54 @@ export class PostService {
         })
       );
   }
+
+  getC(own_code: any) {
+    return this.http
+      .post<any>(this.URL16, { own_code })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return null;
+          }
+          return res.result;
+        })
+      );
+  }
+  getB1(own_code: any) {
+    return this.http
+      .post<any>(this.URL18, { own_code })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return null;
+          }
+          return res.result;
+        })
+      );
+  }
+  getB2(own_code: any) {
+    return this.http
+      .post<any>(this.URL17, { own_code })
+      .pipe(
+        map(res => {
+          if (res.code !== 200) {
+            return null;
+          }
+          return res.result;
+        })
+      );
+  }
+  getA() {
+    return this.http.post<any>(this.URL19, {}).pipe(
+      map(res => {
+        if (res.code !== 200) {
+          return null;
+        }
+        return res.result;
+      })
+    );
+  }
+
   getIdComment(post_id: any) {
     return this.http
       .post<any>(this.URL3, { post_id })

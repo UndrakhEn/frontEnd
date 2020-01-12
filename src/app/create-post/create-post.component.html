@@ -47,11 +47,42 @@
               [nzText]="user.f_name"
               [nzSrc]="user.avatar"
             ></nz-avatar>
-            <span>{{ user.l_name }} - {{ user.f_name }}</span>
+            <span
+              >{{ user.l_name }} - {{ user.f_name }} / {{ user.own_code }}</span
+            >
           </ng-container>
         </nz-mention>
       </nz-form-control>
     </nz-form-item>
+
+    <!-- img uploader -->
+    <nz-form-item>
+      <div class="img-uploader">
+        <nz-upload
+          nzAction="http://49.0.223.68:8080/address/get_aimag_city"
+          nzListType="picture-card"
+          [(nzFileList)]="imgList"
+          [nzShowButton]="true"
+          [nzShowUploadList]="showUploadList"
+          [nzPreview]="handlePreview"
+          nzFileType="image/png,image/jpeg"
+        >
+          <i nz-icon nzType="plus"></i>
+          <div class="ant-upload-text">Зураг оруулах</div>
+        </nz-upload>
+      </div>
+      <nz-modal
+        [nzVisible]="previewVisible"
+        [nzContent]="modalContent"
+        [nzFooter]="null"
+        (nzOnCancel)="previewVisible = false"
+      >
+        <ng-template #modalContent>
+          <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+        </ng-template>
+      </nz-modal>
+    </nz-form-item>
+
     <!-- date -->
     <nz-form-item>
       <nz-form-control [nzSm]="16" [nzXs]="24">

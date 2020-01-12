@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-
+import { ChartsModule } from "ng2-charts";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgZorroAntdModule, NZ_I18N, en_US, mn_MN } from "ng-zorro-antd";
@@ -16,7 +16,7 @@ import { PostsComponent } from "./posts/posts.component";
 import { CreatePostComponent } from "./create-post/create-post.component";
 import { PrivateInformationComponent } from "./private-information/private-information.component";
 import { NotificationComponent } from "./notification/notification.component";
-import { StatisticComponent } from './statistic/statistic.component';
+import { StatisticComponent } from "./statistic/statistic.component";
 
 registerLocaleData(mn);
 
@@ -39,7 +39,8 @@ registerLocaleData(mn);
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ChartsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: mn_MN }],
   bootstrap: [AppComponent]

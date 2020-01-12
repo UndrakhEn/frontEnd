@@ -25,3 +25,10 @@
 .red {
   color: red;
 }
+
+.repl > button {
+  margin-top: 12px;
+}
+.replies {
+  margin-left: 36px;
+}

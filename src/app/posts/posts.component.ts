@@ -25,12 +25,10 @@ export class PostsComponent implements OnInit {
     if (this.auth.getUser.own_code.length === 10) {
       this.postService.getStudentAllPost().subscribe(res => {
         this.listData = res;
-        console.log(res);
       });
     } else {
       this.postService.getAllPost().subscribe(res => {
         this.listData = res;
-        console.log(res);
       });
     }
   }
