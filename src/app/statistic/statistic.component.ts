@@ -19,6 +19,7 @@ export class StatisticComponent implements OnInit {
   arr: Array<any> = [];
   arr2: Array<any> = [];
   arr3: Array<any> = [];
+  type: string = "";
   // bar1
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -139,15 +140,12 @@ export class StatisticComponent implements OnInit {
       ]
     }
   ];
-  type: string = "";
 
   constructor(private postService: PostService, private auth: AuthService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
-
     this.type = this.auth.getUser.type;
-    // if (this.type == "B") {
-    // } else {
+    console.log("------------------>", this.type);
     this.postService.getC(this.auth.getUser.own_code).subscribe(res => {
       this.pieChartData[0] = res.thanks;
       this.pieChartData[1] = res.sent;

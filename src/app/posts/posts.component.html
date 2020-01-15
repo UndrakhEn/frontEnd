@@ -4,7 +4,7 @@
       <div nz-col nzSpan="2">
         <nz-avatar
           class="postAvatar"
-          [nzText]="!i.is_vissible ? i.user.f_name.substr(0, 1) : 'О'"
+          [nzText]="!i.is_vissible ? i.user.f_name.substr(0, 1) : 'Н'"
           [nzSize]="48"
           [nzSrc]="i.avatar"
         ></nz-avatar>
@@ -14,7 +14,7 @@
           ><span class="post-user" *ngIf="!i.is_vissible">
             {{ i.user.l_name }} {{ i.user.f_name }}
           </span>
-          <span class="post-user" *ngIf="i.is_vissible">Оюутан</span>
+          <span class="post-user" *ngIf="i.is_vissible">Нэр нууцалсан</span>
         </span>
         <span class="red" *ngIf="!i.is_thanks">
           Санал хүсэлт

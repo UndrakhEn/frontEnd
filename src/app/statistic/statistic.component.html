@@ -1,7 +1,9 @@
 <div nz-row class="main">
   <!-- salbar sur -->
-  <h2>Салбар сургуульд ирсэн санал хүсэлтийн статусын график</h2>
-  <div class="chart-wrapper">
+  <h2 *ngIf="type == 'A'">
+    МУБИС-ийн салбар сургуульд ирсэн санал хүсэлт
+  </h2>
+  <div *ngIf="type == 'A'" class="chart-wrapper">
     <canvas
       baseChart
       [datasets]="barChartData3"
@@ -15,8 +17,10 @@
     </canvas>
   </div>
   <!-- tenhmiin erhlegchiin graphic -->
-  <h2>Тэнхимүүдэд ирсэн санал хүсэлтийн статусын график</h2>
-  <div class="chart-wrapper">
+  <h2 *ngIf="type == 'A' || type == 'B'">
+    Тэнхимүүдэд (салбар) ирсэн санал хүсэлт
+  </h2>
+  <div *ngIf="type == 'A' || type == 'B'" class="chart-wrapper">
     <canvas
       baseChart
       [datasets]="barChartData"
@@ -31,8 +35,8 @@
   </div>
 
   <!-- bagsh nar -->
-  <h2>Тэнхмийн багш нарт ирсэн санал хүсэлтийн статусын график</h2>
-  <div class="chart-wrapper">
+  <h2 *ngIf="type != 'C'">Багш нарт ирсэн санал хүсэлт</h2>
+  <div *ngIf="type != 'C'" class="chart-wrapper">
     <canvas
       baseChart
       [datasets]="barChartData2"
@@ -45,7 +49,7 @@
     >
     </canvas>
   </div>
-  <h2>Таньд ирсэн санал хүсэлтийн статусын график</h2>
+  <h2>Таньд ирсэн санал хүсэлт</h2>
 
   <!-- oort irsen -->
   <div class="chart-wrapper">
