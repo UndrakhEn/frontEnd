@@ -72,7 +72,7 @@ export class CreatePostComponent implements OnInit {
       this.postForm.controls[i].updateValueAndValidity();
     }
     if (this.postForm.invalid || !this.postForm.controls.agree.value) {
-      this.notification.blank("Анхаар!", "Зөрчлийн тухай хуульийг уншина уу?");
+      this.notification.blank("Анхаар!", "Зөрчлийн тухай хуулийг уншина уу?");
       return;
     }
     console.log(this.tagged);

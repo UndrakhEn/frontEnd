@@ -16,12 +16,25 @@
           </span>
           <span class="post-user" *ngIf="i.is_vissible">Оюутан</span>
         </span>
-        <span class="red" *ngIf="!i.is_thanks"> Санал хүсэлт</span>
-        <span class="green" *ngIf="i.is_thanks"> Талархал</span>
-
-        <!-- <span *ngFor="let j of i.tagged_user"
-          >{{ j.l_name }} {{ j.f_name }}
-        </span> -->
+        <span class="red" *ngIf="!i.is_thanks">
+          Санал хүсэлт
+          <i
+            nz-icon
+            nzType="warning"
+            *ngIf="i.perfor_code != 'done'"
+            nzTheme="outline"
+          ></i>
+          <i
+            nz-icon
+            class="green"
+            nzType="check-circle"
+            *ngIf="i.perfor_code == 'done'"
+            nzTheme="outline"
+          ></i>
+        </span>
+        <span class="green" *ngIf="i.is_thanks">
+          Талархал <i nz-icon nzType="check-circle" nzTheme="outline"></i
+        ></span>
 
         <p>{{ i.created_date | date: "yyyy/M/d HH:mm" }}</p>
       </div>

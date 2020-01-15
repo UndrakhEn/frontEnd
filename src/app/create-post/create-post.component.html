@@ -1,7 +1,7 @@
 <div class="main">
   <h4>
-    Хэрэв та хэнд хандах, хэн рүү таглахаа мэдэхгүй бол тухайн тэнхимийн
-    эрхлэгч эсвэл салбар сургуулийн хөтөлбөрийн албаны ажилтан болон дарга руу
+    Хэрэв та хэнд хандах, хэн рүү таглахаа мэдэхгүй бол тухайн тэнхимийн эрхлэгч
+    эсвэл салбар сургуулийн хөтөлбөрийн албаны ажилтан болон дарга руу
     тагласнаар таны асуудлыг түргэн шуурхай шийдвэрлэх болно.
   </h4>
   <form nz-form [formGroup]="postForm" (ngSubmit)="newPost()">
@@ -100,10 +100,9 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control [nzSm]="16" [nzXs]="24">
-        <label nz-checkbox formControlName="agree">
-          <span>Зөвшөөрч байна</span>
+        <label nz-checkbox formControlName="agree" (click)="info()">
+          <span>Зөвшөөрч байна (Зөрчлийн тухай хууль)</span>
         </label>
-        ( <a class="info" (click)="info()">дэлгэрэнгүй</a> )
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>

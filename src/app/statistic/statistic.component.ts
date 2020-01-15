@@ -70,6 +70,7 @@ export class StatisticComponent implements OnInit {
 
   barChartData2: ChartDataSets[] = [
     { data: [0, 0, 0, 0, 0, 0], label: "" },
+    { data: [0, 0, 0, 0, 0, 0], label: "" },
     { data: [0, 0, 0, 0, 0, 0], label: "" }
   ];
   barChartColors2: Color[] = [
@@ -172,7 +173,7 @@ export class StatisticComponent implements OnInit {
 
     this.postService.getB2(this.auth.getUser.own_code).subscribe(res => {
       this.arr2.push(Object.keys(res));
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < 3; i++) {
         this.barChartData2[i].label = this.arr2[0][i];
         this.barChartData2[i].data[0] = res[this.arr2[0][i]].thanks;
         this.barChartData2[i].data[1] = res[this.arr2[0][i]].sent;

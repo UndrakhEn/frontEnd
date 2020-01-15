@@ -46,7 +46,7 @@
         nzPlacement="right"
         nz-tooltip
       >
-        <i nz-icon nzType="bell" nzTheme="outline"></i>
+        <nz-badge nzDot><i nz-icon nzType="notification"></i></nz-badge>
         <span>Ирсэн нийтлэлүүд</span>
       </li>
 
@@ -59,6 +59,7 @@
         nz-tooltip
       >
         <i nz-icon nzType="stock" nzTheme="outline"></i>
+
         <span>Статистик мэдээлэл</span>
       </li>
 
@@ -88,29 +89,9 @@
   <nz-layout>
     <nz-content>
       <div nz-row>
-        <!-- <div nz-col nzXs="24" nzSm="24" nzMd="1" nzLg="1" nzXl="1"></div> -->
         <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
           <router-outlet></router-outlet>
         </div>
-        <!--  -->
-        <!-- <div nz-col nzXs="24" nzSm="24" nzMd="1" nzLg="1" nzXl="1"> -->
-        <!-- <div class="statistic">
-            <nz-row [nzGutter]="24">
-              <nz-col [nzSpan]="12">
-                <nz-statistic
-                  [nzValue]="element1 | number"
-                  [nzTitle]="'Бүх санал хүсэлтийн тоо'"
-                ></nz-statistic>
-              </nz-col>
-              <nz-col [nzSpan]="12">
-                <nz-statistic
-                  [nzValue]="element2 | number: '1.0-2'"
-                  [nzTitle]="'Талархалын тоо'"
-                ></nz-statistic>
-              </nz-col>
-            </nz-row>
-          </div> -->
-        <!-- </div> -->
       </div>
     </nz-content>
   </nz-layout>

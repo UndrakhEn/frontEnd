@@ -98,7 +98,7 @@
           <i nz-icon nzType="close" nzTheme="outline"></i>
         </td>
         <td *ngIf="i.perfor_code == 'sent'">
-          <nz-badge nzColor="gray" nzText="Ирсэн"></nz-badge>
+          <nz-badge nzColor="gray" nzText="Шинэ"></nz-badge>
         </td>
         <td *ngIf="i.perfor_code == 'seen'">
           <a
@@ -109,7 +109,7 @@
             nzPopconfirmPlacement="bottom"
             (nzOnConfirm)="postConfirm(i._id)"
           >
-            <nz-badge class="underline">Баталгаажуулах</nz-badge>
+            <nz-badge class="underline">Биелүүлсэн үү?</nz-badge>
           </a>
         </td>
         <td *ngIf="i.perfor_code == 'pending'">
