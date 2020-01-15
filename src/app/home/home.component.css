@@ -12,8 +12,11 @@
 
 nz-avatar {
   margin-top: 20px;
-  margin-bottom: 20px;
   margin-left: 22px;
+}
+.ner {
+  width: 100%;
+  text-align: center;
 }
 nz-content {
   min-height: 100vh;

@@ -21,96 +21,95 @@ export class StatisticComponent implements OnInit {
   arr3: Array<any> = [];
   // bar1
   barChartOptions: ChartOptions = {
-    responsive: true
+    responsive: true,
+    scales: {
+      xAxes: [
+        {
+          stacked: true
+        }
+      ],
+      yAxes: [
+        {
+          stacked: true
+        }
+      ]
+    }
   };
-  barChartLabels: Label[] = [
-    "Талархал",
-    "Ирсэн",
-    "Харсан",
-    "Цуцлагдсан",
-    "Баталгаажаагүй",
-    "Баталгаажсан"
-  ];
-  barChartType: ChartType = "bar";
+  barChartLabels: Label[] = [];
+  barChartType: ChartType = "horizontalBar";
   barChartLegend = true;
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" }
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 0", label: "Талархал" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Ирсэн" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Харсан" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Цуцлагдсан" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Баталгаажаагүй" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Баталгаажсан" }
   ];
-  barChartColors: Color[] = [
-    // {
-    //   borderColor: "white",
-    //   backgroundColor: [
-    //     "rgb(255, 202, 90)"
-    //   ]
-    // }
-  ];
+  barChartColors: Color[] = [];
   // bar 2
   barChartOptions2: ChartOptions = {
-    responsive: true
+    responsive: true,
+    scales: {
+      xAxes: [
+        {
+          stacked: true
+        }
+      ],
+      yAxes: [
+        {
+          stacked: true
+        }
+      ]
+    }
   };
-  barChartLabels2: Label[] = [
-    "Талархал",
-    "Ирсэн",
-    "Харсан",
-    "Цуцлагдсан",
-    "Баталгаажаагүй",
-    "Баталгаажсан"
-  ];
-  barChartType2: ChartType = "bar";
+  barChartLabels2: Label[] = [];
+  barChartType2: ChartType = "horizontalBar";
   barChartLegend2 = true;
   barChartPlugins2 = [];
 
   barChartData2: ChartDataSets[] = [
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" }
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 0", label: "Талархал" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Ирсэн" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Харсан" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Цуцлагдсан" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Баталгаажаагүй" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Баталгаажсан" }
   ];
-  barChartColors2: Color[] = [
-    // {
-    //   borderColor: "white",
-    //   backgroundColor: [
-    //     "rgb(255, 202, 90)"
-    //   ]
-    // }
-  ];
+  barChartColors2: Color[] = [];
 
   // bar 3
   barChartOptions3: ChartOptions = {
-    responsive: true
+    responsive: true,
+    scales: {
+      xAxes: [
+        {
+          stacked: true
+        }
+      ],
+      yAxes: [
+        {
+          stacked: true
+        }
+      ]
+    }
   };
-  barChartLabels3: Label[] = [
-    "Талархал",
-    "Ирсэн",
-    "Харсан",
-    "Цуцлагдсан",
-    "Баталгаажаагүй",
-    "Баталгаажсан"
-  ];
-  barChartType3: ChartType = "bar";
+  barChartLabels3: Label[] = [];
+  barChartType3: ChartType = "horizontalBar";
   barChartLegend3 = true;
   barChartPlugins3 = [];
 
   barChartData3: ChartDataSets[] = [
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" },
-    { data: [0, 0, 0, 0, 0, 0], label: "" }
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 0", label: "Талархал" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Ирсэн" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Харсан" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Цуцлагдсан" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Баталгаажаагүй" },
+    { data: [0, 0, 0, 0, 0, 0], stack: "Stack 1", label: "Баталгаажсан" }
   ];
-  barChartColors3: Color[] = [
-    // {
-    //   borderColor: "white",
-    //   backgroundColor: [
-    //     "rgb(255, 202, 90)"
-    //   ]
-    // }
-  ];
+  barChartColors3: Color[] = [];
 
   pieChartOptions: ChartOptions = {
     responsive: true
@@ -160,39 +159,39 @@ export class StatisticComponent implements OnInit {
     this.postService.getB1(this.auth.getUser.own_code).subscribe(res => {
       this.arr.push(Object.keys(res));
       // console.log("------------->", res);
-      for (let i = 0; i < 7; i++) {
-        this.barChartData[i].label = this.arr[0][i];
-        this.barChartData[i].data[0] = res[this.arr[0][i]].thanks;
-        this.barChartData[i].data[1] = res[this.arr[0][i]].sent;
-        this.barChartData[i].data[2] = res[this.arr[0][i]].seen;
-        this.barChartData[i].data[3] = res[this.arr[0][i]].reject;
-        this.barChartData[i].data[4] = res[this.arr[0][i]].pending;
-        this.barChartData[i].data[5] = res[this.arr[0][i]].done;
+      for (let i = 0; i < this.arr[0].length; i++) {
+        this.barChartLabels[i] = this.arr[0][i];
+        this.barChartData[0].data[i] = res[this.arr[0][i]].thanks;
+        this.barChartData[1].data[i] = res[this.arr[0][i]].sent;
+        this.barChartData[2].data[i] = res[this.arr[0][i]].seen;
+        this.barChartData[3].data[i] = res[this.arr[0][i]].reject;
+        this.barChartData[4].data[i] = res[this.arr[0][i]].pending;
+        this.barChartData[5].data[i] = res[this.arr[0][i]].done;
       }
     });
 
     this.postService.getB2(this.auth.getUser.own_code).subscribe(res => {
       this.arr2.push(Object.keys(res));
-      for (let i = 0; i < 3; i++) {
-        this.barChartData2[i].label = this.arr2[0][i];
-        this.barChartData2[i].data[0] = res[this.arr2[0][i]].thanks;
-        this.barChartData2[i].data[1] = res[this.arr2[0][i]].sent;
-        this.barChartData2[i].data[2] = res[this.arr2[0][i]].seen;
-        this.barChartData2[i].data[3] = res[this.arr2[0][i]].reject;
-        this.barChartData2[i].data[4] = res[this.arr2[0][i]].pending;
-        this.barChartData2[i].data[5] = res[this.arr2[0][i]].done;
+      for (let i = 0; i < this.arr2[0].length; i++) {
+        this.barChartLabels2[i] = this.arr2[0][i];
+        this.barChartData2[0].data[i] = res[this.arr2[0][i]].thanks;
+        this.barChartData2[1].data[i] = res[this.arr2[0][i]].sent;
+        this.barChartData2[2].data[i] = res[this.arr2[0][i]].seen;
+        this.barChartData2[3].data[i] = res[this.arr2[0][i]].reject;
+        this.barChartData2[4].data[i] = res[this.arr2[0][i]].pending;
+        this.barChartData2[5].data[i] = res[this.arr2[0][i]].done;
       }
     });
     this.postService.getA().subscribe(res => {
       this.arr3.push(Object.keys(res));
-      for (let i = 0; i < 3; i++) {
-        this.barChartData3[i].label = this.arr3[0][i];
-        this.barChartData3[i].data[0] = res[this.arr3[0][i]].thanks;
-        this.barChartData3[i].data[1] = res[this.arr3[0][i]].sent;
-        this.barChartData3[i].data[2] = res[this.arr3[0][i]].seen;
-        this.barChartData3[i].data[3] = res[this.arr3[0][i]].reject;
-        this.barChartData3[i].data[4] = res[this.arr3[0][i]].pending;
-        this.barChartData3[i].data[5] = res[this.arr3[0][i]].done;
+      for (let i = 0; i < this.arr3[0].length; i++) {
+        this.barChartLabels3[i] = this.arr3[0][i];
+        this.barChartData3[0].data[i] = res[this.arr3[0][i]].thanks;
+        this.barChartData3[1].data[i] = res[this.arr3[0][i]].sent;
+        this.barChartData3[2].data[i] = res[this.arr3[0][i]].seen;
+        this.barChartData3[3].data[i] = res[this.arr3[0][i]].reject;
+        this.barChartData3[4].data[i] = res[this.arr3[0][i]].pending;
+        this.barChartData3[5].data[i] = res[this.arr3[0][i]].done;
       }
     });
   }

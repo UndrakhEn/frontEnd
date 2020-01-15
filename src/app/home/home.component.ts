@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   element2: number;
   listData: Array<any> = [];
   bool: boolean = false;
+  ner: string = "";
   constructor(
     private modal: NzModalService,
     private auth: AuthService,
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
     if (this.auth.getUser.own_code.length === 10) {
       this.bool = true;
     }
+    this.ner = this.auth.getUser.own_code;
   }
   ngOnInit() {}
   logout() {

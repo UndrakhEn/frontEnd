@@ -11,7 +11,14 @@
       nzSrc="/assets/avatar.jpg"
       [nzAlt]="'aaa'"
       [nzText]="'bb'"
+      [nzTitle]="isCollapsed ? ner : ''"
+      nzPlacement="right"
+      nz-tooltip
     ></nz-avatar>
+    <br />
+    <div class="ner" *ngIf="!isCollapsed">
+      <p>{{ ner }}</p>
+    </div>
 
     <ul
       nz-menu
@@ -42,12 +49,12 @@
       <li
         nz-menu-item
         routerLink="/app/notification"
-        [nzTitle]="isCollapsed ? 'Мэдэгдэл' : ''"
+        [nzTitle]="isCollapsed ? 'Ирсэн нийтлэлүүд' : ''"
         nzPlacement="right"
         nz-tooltip
       >
         <nz-badge nzDot><i nz-icon nzType="notification"></i></nz-badge>
-        <span>Ирсэн нийтлэлүүд</span>
+        <span *ngIf="!isCollapsed">Ирсэн нийтлэлүүд</span>
       </li>
 
       <li
